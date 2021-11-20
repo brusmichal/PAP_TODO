@@ -15,7 +15,7 @@ public class StageDefault {
     private final int width;
     private final int height;
 
-    public StageDefault(@Value("application.name")  String title,
+    public StageDefault(@Value("${application.title}")  String title,
                         @Value("${application.width}")  int width,
                         @Value("${application.height}")  int height)
     {
