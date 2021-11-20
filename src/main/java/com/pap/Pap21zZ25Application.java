@@ -1,5 +1,7 @@
 package com.pap;
 
+import com.pap.view.TaskApplication;
+import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,7 +10,7 @@ public class Pap21zZ25Application {
 
     public static void main(String[] args)
     {
-        SpringApplication.run(Pap21zZ25Application.class, args);
+        Application.launch(TaskApplication.class, args);
     }
 
 }

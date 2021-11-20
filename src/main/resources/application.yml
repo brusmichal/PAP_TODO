@@ -7,3 +7,5 @@ spring:
       database: pap-databse
       port: 27017
       host: localhost
+  main:
+    web-application-type: none
