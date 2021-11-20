@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      authentication-database: admin
+      username: mongousr
+      password: mon35G00
+      database: pap-databse
+      port: 27017
+      host: localhost
