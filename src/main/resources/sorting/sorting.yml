@@ -1,0 +1,2 @@
+sorting:
+  classes: Alphabetically;com.pap.sort.AlphabeticalSort,Due date;com.pap.sort.DueDateSort,Date created;com.pap.sort.DateCreatedSort
