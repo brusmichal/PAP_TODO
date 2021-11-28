@@ -1,0 +1,28 @@
+.clear-button{
+    -fx-background-color: #af1919;
+    -fx-max-height: 20;
+    -fx-max-width: 20;
+}
+.add-button{
+    -fx-background-color: #1eaf19;
+    -fx-max-height: 20;
+    -fx-max-width: 20;
+}
+
+.finish-button{
+    -fx-background-color: #1eaf19;
+    -fx-max-height: 20;
+    -fx-max-width: 20;
+}
+
+.update-button{
+    -fx-background-color: #1932af;
+    -fx-max-height: 20;
+    -fx-max-width: 20;
+}
+
+.remove-button{
+    -fx-background-color: #AF192FFF;
+    -fx-max-height: 20;
+    -fx-max-width: 20;
+}
