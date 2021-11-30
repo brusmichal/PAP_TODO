@@ -23,7 +23,7 @@ import java.time.format.DateTimeFormatter;
 @Builder(setterPrefix = "with", access = AccessLevel.PRIVATE)
 public class TaskInstance extends HBox {
     private static final String TASK_STYLE = "instance";
-    private static final String VBOX_STYLE = "instance";
+    private static final String VBOX_STYLE = "vbox-style";
 
     private final Task task;
     private final Label title;
@@ -129,7 +129,7 @@ public class TaskInstance extends HBox {
     private TaskInstance setDoneTask()
     {
         setDefaultTaskInstance();
-        setMargin(removeButton, new Insets(20,0,20,40));
+        setMargin(removeButton, new Insets(20,40,20,0));
 
         this.getChildren().add(removeButton);
         removeButton.getOnMouseExited().handle(null);

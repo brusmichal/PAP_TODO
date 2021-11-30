@@ -19,6 +19,7 @@
 
 .vbox-style{
     -fx-pref-width: 500;
+    -fx-text-alignment: center;
     -fx-alignment: center;
 }
 
@@ -26,4 +27,6 @@
     -fx-pref-width: 600;
     -fx-pref-height: 80;
     -fx-background-color: #af9019;
+    -fx-alignment: center;
+    -fx-border-color: #000000;
 }
