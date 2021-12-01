@@ -51,13 +51,13 @@ public class NewTask extends HBox implements Remove, Add {
     @Override
     public void addTask(final Task task)
     {
-        // In the future Id will be set by the JPA
         final var newTask = Task.builder()
                 .withTitle(textField.getText())
                 .withCreationTime(LocalDateTime.now())
                 .withDueDate(LocalDateTime.of(datePicker.getValue(), LocalTime.now(ZoneId.of("Europe/Warsaw"))))
                 .withId(textField.getText())
                 .withStatus(Status.TO_DO)
+                .withUser("root")
                 .build();
         add.addTask(newTask);
         removeTask(newTask);

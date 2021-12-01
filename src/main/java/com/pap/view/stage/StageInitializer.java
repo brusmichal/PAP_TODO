@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -21,10 +22,8 @@ import java.io.IOException;
  * Initializes stage component and all stylesheets.
  */
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class StageInitializer implements ApplicationListener<StageReadyEvent> {
-
-    @Value("classpath:/javafx/loginPage.fxml")
-    private Resource loginPage;
 
     @Value("classpath:/images/icon.png")
     private Resource icon;
@@ -32,14 +31,8 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
     private final StageDefault stageDefault;
     private final ApplicationContext applicationContext;
     private final StylesheetInitializer stylesheetInitializer;
+    private final FirstPageLoader pageLoader;
 
-    @Autowired
-    public StageInitializer(final StageDefault stageDefault, final ApplicationContext applicationContext, final StylesheetInitializer stylesheetInitializer)
-    {
-        this.stageDefault = stageDefault;
-        this.applicationContext = applicationContext;
-        this.stylesheetInitializer = stylesheetInitializer;
-    }
 
     @Override
     public void onApplicationEvent(final StageReadyEvent event)
@@ -61,7 +54,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
 
     private Parent getParentFromFXML() throws IOException
     {
-        final var fxmlLoader = new FXMLLoader(loginPage.getURL());
+        final var fxmlLoader = new FXMLLoader(pageLoader.getStartingPageURL());
         fxmlLoader.setControllerFactory(applicationContext::getBean);
         return fxmlLoader.load();
     }

@@ -4,7 +4,8 @@
 <?import javafx.scene.layout.*?>
 
 <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.pap.view.login.LoginPage">
+      fx:controller="com.pap.view.pages.LoginPage"
+      fx:id="loginPage">
     <TextField fx:id="usernameField" promptText="Enter username" styleClass="field"/>
     <PasswordField fx:id="passwordField" promptText="Enter password" styleClass="field"/>
     <Button fx:id="login" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#tryToLogIn"

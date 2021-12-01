@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 @Component
 public class TaskPage extends DefaultPage<NewTask> implements TaskEvents {
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
     @Autowired
     public TaskPage(final TaskRepository taskRepository)
@@ -22,68 +22,24 @@ public class TaskPage extends DefaultPage<NewTask> implements TaskEvents {
         this.taskRepository = taskRepository;
         this.lowerPanel = new NewTask(this);
         setUpVBox();
-        generateData();
+        taskRepository.getTasksByUserAndStatus("root", Status.TO_DO)
+                .forEach(this::addTaskToGridPane);
     }
 
-    // Mock data
-    public void generateData()
-    {
-        final var task1 = Task.builder()
-                .withId("1")
-                .withTitle("TITLE ONE")
-                .withCreationTime(LocalDateTime.now())
-                .withDueDate(LocalDateTime.now().plusDays(1))
-                .withStatus(Status.TO_DO)
-                .build();
 
-        final var task2 = Task.builder()
-                .withId("2")
-                .withTitle("TITLE TW")
-                .withCreationTime(LocalDateTime.now())
-                .withDueDate(LocalDateTime.now().plusDays(1))
-                .withStatus(Status.TO_DO)
-                .build();
-
-        final var task3 = Task.builder()
-                .withId("3")
-                .withTitle("TITLE TREE")
-                .withCreationTime(LocalDateTime.now())
-                .withDueDate(LocalDateTime.now().plusDays(1))
-                .withStatus(Status.TO_DO)
-                .build();
-
-        final var task4 = Task.builder()
-                .withId("4")
-                .withTitle("TITLE FOR")
-                .withCreationTime(LocalDateTime.now())
-                .withDueDate(LocalDateTime.now().minusDays(1))
-                .withStatus(Status.TO_DO)
-                .build();
-
-        final var task5 = Task.builder()
-                .withId("5")
-                .withTitle("TITLE ONE")
-                .withCreationTime(LocalDateTime.now())
-                .withDueDate(LocalDateTime.now().plusDays(2))
-                .withStatus(Status.TO_DO)
-                .build();
-
-        addTask(task1);
-        addTask(task2);
-        addTask(task3);
-        addTask(task4);
-        addTask(task5);
-
-    }
 
     @Override
     public void addTask(final Task task)
     {
-        // taskRepository.insert(task);
+        taskRepository.insert(task);
+        addTaskToGridPane(task);
+    }
+
+    private void addTaskToGridPane(final Task task)
+    {
         final var taskInstance = TaskInstance.fromTask(task,this);
         gridPane.add(taskInstance,0,tasks.size());
         tasks.add(taskInstance);
-
     }
 
     @Override
@@ -95,14 +51,14 @@ public class TaskPage extends DefaultPage<NewTask> implements TaskEvents {
             tasks.remove(instance);
             addTasksToGridPane();
         });
-        // taskRepository.insert(task);
+         taskRepository.save(task);
     }
 
     @Override
     public void removeTask(final Task task)
     {
-        //taskRepository.insert(task);
         task.setStatus(Status.DELETED);
+        taskRepository.save(task);
         getInstanceFromChildren(task).ifPresent(instance -> {
             tasks.remove(instance);
             addTasksToGridPane();
@@ -112,7 +68,7 @@ public class TaskPage extends DefaultPage<NewTask> implements TaskEvents {
     @Override
     public void updateTask(final Task task)
     {
-        //taskRepository.insert(task);
+        taskRepository.insert(task);
         getInstanceFromChildren(task).ifPresent(instance -> {
             gridPane.getChildren().remove(instance);
             addTasksToGridPane();
