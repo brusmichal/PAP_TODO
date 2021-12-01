@@ -23,8 +23,8 @@ import java.io.IOException;
 @Component
 public class StageInitializer implements ApplicationListener<StageReadyEvent> {
 
-    @Value("classpath:/javafx/mainStage.fxml")
-    private Resource mainStageResource;
+    @Value("classpath:/javafx/loginPage.fxml")
+    private Resource loginPage;
 
     @Value("classpath:/images/icon.png")
     private Resource icon;
@@ -61,7 +61,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
 
     private Parent getParentFromFXML() throws IOException
     {
-        final var fxmlLoader = new FXMLLoader(mainStageResource.getURL());
+        final var fxmlLoader = new FXMLLoader(loginPage.getURL());
         fxmlLoader.setControllerFactory(applicationContext::getBean);
         return fxmlLoader.load();
     }

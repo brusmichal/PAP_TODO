@@ -31,6 +31,7 @@ public class  DefaultPage<T extends Node> extends VBox {
     private void setUpScrollPane()
     {
         scrollPane.setContent(gridPane);
+        scrollPane.setFitToWidth(true);
     }
 
     protected void setUpVBox()

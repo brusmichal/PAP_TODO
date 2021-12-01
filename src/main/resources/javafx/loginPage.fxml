@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.pap.view.login.LoginPage">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-</AnchorPane>
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.pap.view.login.LoginPage">
+    <TextField fx:id="usernameField" promptText="Enter username" styleClass="field"/>
+    <PasswordField fx:id="passwordField" promptText="Enter password" styleClass="field"/>
+    <Button fx:id="login" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#tryToLogIn"
+            text="Sign In" textAlignment="CENTER"/>
+    <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" text="Create Account"/>
+</VBox>
