@@ -10,7 +10,6 @@ import com.pap.view.task.TaskInstance;
 import com.pap.view.task.buttons.remove.Remove;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 import java.util.Comparator;
 
 @Getter
@@ -24,70 +23,14 @@ public class DonePage extends DefaultPage<SortingPanel> implements Remove, Sort 
         this.lowerPanel = new SortingPanel(sortingProperties,this);
 
         setUpVBox();
-        generateData();
-    }
-
-    // TODO REMOVE
-    // Mock data
-    public void generateData()
-    {
-        final var task1 = Task.builder()
-                .withId("1")
-                .withTitle("O")
-                .withCreationTime(LocalDateTime.now().plusDays(3))
-                .withDueDate(LocalDateTime.now().plusDays(1))
-                .withEndTime(LocalDateTime.now())
-                .withStatus(Status.TO_DO)
-                .build();
-
-        final var task2 = Task.builder()
-                .withId("2")
-                .withTitle("C")
-                .withCreationTime(LocalDateTime.now().plusDays(20))
-                .withDueDate(LocalDateTime.now().plusDays(1))
-                .withEndTime(LocalDateTime.now().plusDays(4))
-                .withStatus(Status.TO_DO)
-                .build();
-
-        final var task3 = Task.builder()
-                .withId("3")
-                .withTitle("D")
-                .withCreationTime(LocalDateTime.now())
-                .withDueDate(LocalDateTime.now().plusDays(2))
-                .withEndTime(LocalDateTime.now().plusDays(1))
-                .withStatus(Status.TO_DO)
-                .build();
-
-        final var task4 = Task.builder()
-                .withId("4")
-                .withTitle("B")
-                .withCreationTime(LocalDateTime.now().plusDays(10))
-                .withDueDate(LocalDateTime.now().minusDays(1))
-                .withEndTime(LocalDateTime.now().plusDays(5))
-                .withStatus(Status.TO_DO)
-                .build();
-
-        final var task5 = Task.builder()
-                .withId("5")
-                .withTitle("A")
-                .withCreationTime(LocalDateTime.now())
-                .withDueDate(LocalDateTime.now().plusDays(2))
-                .withEndTime(LocalDateTime.now().plusDays(1))
-                .withStatus(Status.TO_DO)
-                .build();
-
-        addTask(task1);
-        addTask(task2);
-        addTask(task3);
-        addTask(task4);
-        addTask(task5);
+        taskRepository.getTasksByUserAndStatus("root", Status.DONE)
+                .forEach(this::addTask);
 
     }
 
 
     public void addTask(final Task task)
     {
-        // taskRepository.insert(task);
         final var taskInstance = TaskInstance.ofDoneTask(task,this);
         gridPane.add(taskInstance,0,tasks.size());
         tasks.add(taskInstance);
@@ -97,8 +40,9 @@ public class DonePage extends DefaultPage<SortingPanel> implements Remove, Sort 
     @Override
     public void removeTask(final Task task)
     {
-        // taskRepository.insert(task);
+
         task.setStatus(Status.TRASHED);
+        taskRepository.save(task);
         getInstanceFromChildren(task).ifPresent(instance -> {
             tasks.remove(instance);
             addTasksToGridPane();
@@ -110,7 +54,6 @@ public class DonePage extends DefaultPage<SortingPanel> implements Remove, Sort 
     {
         tasks.sort(comparator);
         addTasksToGridPane();
-        //gridPane.getChildren().addAll(tasks);
     }
 
 }

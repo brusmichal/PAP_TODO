@@ -2,3 +2,7 @@
     -fx-max-width: 200;
     -fx-max-height: 60;
 }
+.incorrect-username-or-password{
+    -fx-text-fill: #ce0e0e;
+    -fx-font-size: 16px;
+}

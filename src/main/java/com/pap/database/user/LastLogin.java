@@ -3,18 +3,16 @@ package com.pap.database.user;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/**
- * User of an application
- */
+import java.time.LocalDateTime;
+
 @Getter
 @Document
 @Builder(setterPrefix = "with")
-public class User {
+public class LastLogin {
     @Id
     private String id;
 
@@ -23,14 +21,12 @@ public class User {
     @Indexed(unique = true)
     private String username;
 
-    // Password used for authentication of a user
-    @Setter
+    // Time when the user started its last session
     @NonNull
-    private String password;
+    private LocalDateTime lastLoginTime;
 
-    // Address on which the notifications will be sent
-    @Setter
-    @NonNull
-    private String email;
-
+    // Indicates if the session is still going on
+    @Builder.Default
+    private boolean login = true;
 }
+
