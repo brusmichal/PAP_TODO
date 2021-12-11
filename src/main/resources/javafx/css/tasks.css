@@ -11,3 +11,11 @@
     -fx-pref-height: 40;
 }
 
+.hour-picker{
+    -fx-text-fill: #000000;
+}
+
+.hour-picker-bad{
+    -fx-text-fill: #ce0e0e;
+}
+

@@ -15,3 +15,12 @@
         -fx-pref-height: 80;
         -fx-alignment: center;
 }
+
+.log-out-button{
+        -fx-background-color: #ff0000;
+        -fx-font-size: 20;
+        -fx-font-family: "Lucida Console";
+        -fx-pref-width: 200;
+        -fx-pref-height: 80;
+        -fx-alignment: center;
+}

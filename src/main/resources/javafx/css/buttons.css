@@ -1,28 +1,46 @@
 .clear-button{
     -fx-background-color: #af1919;
-    -fx-max-height: 20;
-    -fx-max-width: 20;
+    -fx-max-height: 40;
+    -fx-max-width: 40;
+    -fx-background-image: url('/images/clear.png');
+    -fx-background-position: center;
+    -fx-background-size: 30px;
+    -fx-background-repeat: no-repeat;
 }
 .add-button{
-    -fx-background-color: #1eaf19;
-    -fx-max-height: 20;
-    -fx-max-width: 20;
+    /*-fx-background-color: #1eaf19;*/
+    -fx-max-height: 40;
+    -fx-max-width: 40;
+    -fx-background-image: url('/images/add.png');
+    -fx-background-position: center;
+    -fx-background-size: 30px;
+    -fx-background-repeat: no-repeat;
+    /*-fx-background-position: 100%;*/
 }
 
 .finish-button{
     -fx-background-color: #1eaf19;
-    -fx-max-height: 20;
-    -fx-max-width: 20;
+    -fx-max-height: 40;
+    -fx-max-width: 40;
+    -fx-background-image: url('/images/finish.png');
+    -fx-background-position: center;
+    -fx-background-size: 30px;
+    -fx-background-repeat: no-repeat;
 }
 
 .update-button{
     -fx-background-color: #1932af;
-    -fx-max-height: 20;
-    -fx-max-width: 20;
+    -fx-max-height: 40;
+    -fx-max-width: 40;
 }
 
 .remove-button{
     -fx-background-color: #AF192FFF;
-    -fx-max-height: 20;
-    -fx-max-width: 20;
+    -fx-max-height: 40;
+    -fx-max-width: 40;
+    -fx-background-image: url('/images/remove.png');
+    -fx-background-position: center;
+    -fx-background-size: 30px;
+    -fx-background-repeat: no-repeat;
+
 }
