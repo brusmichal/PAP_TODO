@@ -10,5 +10,5 @@
     <PasswordField fx:id="passwordField" promptText="Enter password" styleClass="field"/>
     <Button fx:id="login" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#tryToLogIn"
             text="Sign In" textAlignment="CENTER"/>
-    <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" text="Create Account"/>
+    <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" text="Create Account" onAction="#createUser"/>
 </VBox>

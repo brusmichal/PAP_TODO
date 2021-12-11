@@ -1,6 +1,7 @@
 package com.pap.view.stage;
 
 import com.pap.database.task.repository.TaskRepository;
+import com.pap.session.UserSession;
 import com.pap.sort.SortingProperties;
 import com.pap.view.pages.DonePage;
 import com.pap.view.pages.TaskPage;
@@ -9,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,13 +20,16 @@ import java.util.List;
 /**
  * Main component in which all graphics is rooted.
  */
+@Slf4j
 @Component
 public class MainStage {
     private static final String BUTTON_ON = "switch-button-on";
     private static  final String BUTTON_OFF = "switch-button-off";
 
     private final TaskRepository taskRepository;
+    private final UserSession userSession;
     private final SortingProperties sortingProperties;
+
     private Node currentPage;
     private List<Button> buttons;
 
@@ -35,15 +41,18 @@ public class MainStage {
     private Button doneButton;
     @FXML
     private Button reportsButton;
+    @FXML
+    private Button logout;
 
 
 
     @Autowired
-    public MainStage(final TaskRepository taskRepository, final SortingProperties sortingProperties)
+    public MainStage(final TaskRepository taskRepository, final UserSession userSession, final SortingProperties sortingProperties)
     {
         this.taskRepository = taskRepository;
+        this.userSession = userSession;
         this.sortingProperties = sortingProperties;
-        this.currentPage = new TaskPage(taskRepository);
+        this.currentPage = new TaskPage(taskRepository,userSession);
     }
 
     @FXML
@@ -53,6 +62,7 @@ public class MainStage {
         setTasksPage();
         buttons = List.of(taskButton,doneButton,reportsButton);
     }
+
     public void goToTaskPage(final ActionEvent event)
     {
         event.consume();
@@ -77,21 +87,21 @@ public class MainStage {
     private void setTasksPage()
     {
         root.getChildren().remove(currentPage);
-        currentPage = new TaskPage(taskRepository);
+        currentPage = new TaskPage(taskRepository, userSession);
         root.getChildren().add(currentPage);
     }
 
     private void setDonePage()
     {
         root.getChildren().remove(currentPage);
-        currentPage = new DonePage(taskRepository,sortingProperties);
+        currentPage = new DonePage(taskRepository,sortingProperties, userSession);
         root.getChildren().add(currentPage);
     }
 
     private void setReportPage()
     {
         root.getChildren().remove(currentPage);
-        currentPage = new DonePage(taskRepository,sortingProperties);
+        currentPage = new DonePage(taskRepository,sortingProperties, userSession);
         root.getChildren().add(currentPage);
     }
 
@@ -107,4 +117,15 @@ public class MainStage {
                 });
     }
 
+
+    public void exitApplication(final ActionEvent event)
+    {
+        final var stage = (Stage) logout.getScene().getWindow();
+        stage.close();
+
+        final var lastLogin = userSession.getLastLoginRepository().findFirstByOrderByLastLoginTimeDesc();
+        lastLogin.setLogin(false);
+        userSession.getLastLoginRepository().save(lastLogin);
+        log.info("User {} was successfully log out",lastLogin.getUsername());
+    }
 }

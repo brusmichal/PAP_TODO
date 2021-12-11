@@ -1,7 +1,7 @@
 package com.pap.view.stage;
 
 import com.pap.database.user.LastLogin;
-import com.pap.database.user.repository.LastLoginRepository;
+import com.pap.session.UserSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +24,19 @@ public class FirstPageLoader {
     @Value("classpath:/javafx/mainStage.fxml")
     private Resource mainApplication;
 
-    private final LastLoginRepository lastLoginRepository;
+    private final UserSession userSession;
 
     public URL getStartingPageURL() throws IOException
     {
-        final var lastLogin = lastLoginRepository.findTopByOrderByLastLoginTime();
+        final var lastLogin = userSession.getLastLoginRepository().findFirstByOrderByLastLoginTimeDesc();
         if(lastLogin != null && lastLogin.isLogin())
         {
             log.warn("User {} was logged in without authentication",lastLogin.getUsername());
-            final var userSession = LastLogin.builder()
+            final var lastUserLogin = LastLogin.builder()
                     .withUsername(lastLogin.getUsername())
                     .withLastLoginTime(LocalDateTime.now())
                     .build();
-            lastLoginRepository.insert(userSession);
+            userSession.addUserSession(lastUserLogin);
             return mainApplication.getURL();
         }
         return  loginPage.getURL();

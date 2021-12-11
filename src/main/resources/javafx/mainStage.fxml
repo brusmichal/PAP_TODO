@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
@@ -23,6 +24,12 @@
                 fx:id="reportsButton"
                 styleClass="switch-button-off"
                 onAction="#goToReportPage">
+        </Button>
+        <Region VBox.vgrow="ALWAYS" />
+        <Button text="LOGOUT"
+                fx:id="logout"
+                styleClass="log-out-button"
+                onAction="#exitApplication">
         </Button>
     </VBox>
 

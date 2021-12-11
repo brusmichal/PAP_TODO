@@ -1,6 +1,7 @@
 package com.pap.view.pages;
 
 import com.pap.database.task.Task;
+import com.pap.session.UserSession;
 import com.pap.view.task.TaskInstance;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -13,13 +14,15 @@ import java.util.Optional;
 
 
 public class  DefaultPage<T extends Node> extends VBox {
+    protected final UserSession userSession;
     protected final List<TaskInstance> tasks;
     protected final GridPane gridPane;
     protected  T lowerPanel;
     protected final ScrollPane scrollPane;
 
-    protected DefaultPage()
+    protected DefaultPage(final UserSession userSession)
     {
+        this.userSession = userSession;
         this.tasks = new ArrayList<>();
         this.gridPane = new GridPane();
         this.scrollPane = new ScrollPane();

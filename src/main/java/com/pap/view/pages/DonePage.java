@@ -3,6 +3,7 @@ package com.pap.view.pages;
 import com.pap.database.Status;
 import com.pap.database.task.Task;
 import com.pap.database.task.repository.TaskRepository;
+import com.pap.session.UserSession;
 import com.pap.sort.SortingProperties;
 import com.pap.view.sort.Sort;
 import com.pap.view.sort.SortingPanel;
@@ -16,14 +17,14 @@ import java.util.Comparator;
 public class DonePage extends DefaultPage<SortingPanel> implements Remove, Sort {
     private final TaskRepository taskRepository;
 
-    public DonePage(final TaskRepository taskRepository,final SortingProperties sortingProperties)
+    public DonePage(final TaskRepository taskRepository, final SortingProperties sortingProperties, final UserSession userSession)
     {
-        super();
+        super(userSession);
         this.taskRepository = taskRepository;
         this.lowerPanel = new SortingPanel(sortingProperties,this);
 
         setUpVBox();
-        taskRepository.getTasksByUserAndStatus("root", Status.DONE)
+        taskRepository.getTasksByUserAndStatus(userSession.getUsername(), Status.DONE)
                 .forEach(this::addTask);
 
     }

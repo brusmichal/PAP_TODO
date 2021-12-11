@@ -2,6 +2,7 @@ package com.pap.view.pages;
 
 import com.pap.consts.StageDefault;
 import com.pap.database.user.LastLogin;
+import com.pap.database.user.User;
 import com.pap.session.UserSession;
 import com.pap.view.stage.StylesheetInitializer;
 import javafx.event.ActionEvent;
@@ -10,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -30,13 +30,13 @@ import java.time.LocalDateTime;
 @Slf4j
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class LoginPage {
+public class CreateUserPage {
 
     @Value("classpath:/javafx/mainStage.fxml")
     private Resource mainStageResource;
 
-    @Value("classpath:/javafx/create.fxml")
-    private Resource createUserResource;
+    @Value("classpath:/javafx/loginPage.fxml")
+    private Resource loginResource;
 
     private final UserSession userSession;
 
@@ -44,52 +44,59 @@ public class LoginPage {
     private final StylesheetInitializer stylesheetInitializer;
     private final StageDefault stageDefault;
 
-    @FXML
-    public TextField usernameField;
 
     @FXML
-    public PasswordField passwordField;
-
+    public VBox root;
     @FXML
-    public Button login;
-
+    public TextField username;
     @FXML
-    public VBox loginPage;
+    public TextField email;
+    @FXML
+    public PasswordField password;
 
-    public void tryToLogIn(final ActionEvent event) throws IOException
+    public void tryAddingUser(final ActionEvent event) throws IOException
     {
-        if(checkIfUserIsValid(usernameField.getText(),passwordField.getText()))
+        if(!userSession.getUserRepository().existsUserByUsername(username.getText()))
         {
-            generateNewScene(mainStageResource,event);
-            createUserSession();
+            final var newUser = User.builder()
+                    .withUsername(username.getText())
+                    .withEmail(email.getText())
+                    .withPassword(password.getText())
+                    .build();
+
+            userSession.createNewUser(newUser);
+
+            final var lastLogin = LastLogin.builder()
+                    .withUsername(username.getText())
+                    .withLastLoginTime(LocalDateTime.now())
+                    .build();
+            userSession.addUserSession(lastLogin);
+
+            final var parent = getParentFromFXML(mainStageResource);
+            final var newScene = new Scene(parent);
+            var stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stylesheetInitializer.addFilesToScene(newScene);
+            stage.setScene(newScene);
+            stage.show();
         }
         else
         {
-            final var label = new Label("INCORRECT PASSWORD");
+            final var label = new Label("USERNAME ALREADY IN USE");
             label.getStyleClass().add("incorrect-username-or-password");
-            loginPage.getChildren().add(label);
+            root.getChildren().add(label);
 
-            log.warn("Username {} failed to login",usernameField.getText());
+            log.warn("Username {} already exists",username.getText());
         }
     }
 
-    public void createUser(final ActionEvent event) throws IOException
+    public void goBackToLogin(final ActionEvent event) throws IOException
     {
-        generateNewScene(createUserResource,event);
-    }
-
-    private void generateNewScene(final Resource resource, final ActionEvent event) throws IOException
-    {
-        final var parent = getParentFromFXML(resource);
+        final var parent = getParentFromFXML(loginResource);
         final var newScene = new Scene(parent, stageDefault.getWidth(), stageDefault.getHeight());
         var stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stylesheetInitializer.addFilesToScene(newScene);
         stage.setScene(newScene);
         stage.show();
-    }
-    private boolean checkIfUserIsValid(String username, String password)
-    {
-        return userSession.getUserRepository().existsUserByUsernameAndPassword(username,password);
     }
 
     private Parent getParentFromFXML(final Resource resource) throws IOException
@@ -97,16 +104,5 @@ public class LoginPage {
         final var fxmlLoader = new FXMLLoader(resource.getURL());
         fxmlLoader.setControllerFactory(applicationContext::getBean);
         return fxmlLoader.load();
-    }
-
-    private void createUserSession()
-    {
-        final var lastLogin = LastLogin.builder()
-                .withUsername(usernameField.getText())
-                .withLastLoginTime(LocalDateTime.now())
-                .build();
-        userSession.addUserSession(lastLogin);
-        log.info("Successful login to application by user {}", usernameField.getText());
-
     }
 }

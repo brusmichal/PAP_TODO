@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LastLoginRepository extends MongoRepository<LastLogin,String> {
-    LastLogin findTopByOrderByLastLoginTime();
+    LastLogin findFirstByOrderByLastLoginTimeDesc();
 }
