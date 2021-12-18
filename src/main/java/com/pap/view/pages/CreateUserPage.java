@@ -4,6 +4,7 @@ import com.pap.consts.StageDefault;
 import com.pap.database.user.LastLogin;
 import com.pap.database.user.User;
 import com.pap.session.UserSession;
+import com.pap.view.alerts.AlertFactory;
 import com.pap.view.stage.StylesheetInitializer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,9 +12,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,8 @@ import java.time.LocalDateTime;
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CreateUserPage {
+    private static final String DIALOG_TITLE = "User creation Failed";
+    private static final String DIALOG_CONTENT = "User with given name already exists";
 
     @Value("classpath:/javafx/mainStage.fxml")
     private Resource mainStageResource;
@@ -53,6 +57,10 @@ public class CreateUserPage {
     public TextField email;
     @FXML
     public PasswordField password;
+    @FXML
+    public Button goBack;
+    @FXML
+    public Button create;
 
     public void tryAddingUser(final ActionEvent event) throws IOException
     {
@@ -81,10 +89,7 @@ public class CreateUserPage {
         }
         else
         {
-            final var label = new Label("USERNAME ALREADY IN USE");
-            label.getStyleClass().add("incorrect-username-or-password");
-            root.getChildren().add(label);
-
+            AlertFactory.createErrorDialog(DIALOG_TITLE,DIALOG_CONTENT).show();
             log.warn("Username {} already exists",username.getText());
         }
     }
@@ -104,5 +109,31 @@ public class CreateUserPage {
         final var fxmlLoader = new FXMLLoader(resource.getURL());
         fxmlLoader.setControllerFactory(applicationContext::getBean);
         return fxmlLoader.load();
+    }
+
+
+    public void highlightGoBackButton(final MouseEvent event)
+    {
+        create.getStyleClass().clear();
+        create.getStyleClass().add("createUserButton");
+    }
+
+    public void rollbackGoBackButton(final MouseEvent event)
+    {
+        create.getStyleClass().clear();
+        create.getStyleClass().add("highlightCreateUserButton");
+    }
+
+
+    public void highlightCreateButton(final MouseEvent event)
+    {
+        goBack.getStyleClass().clear();
+        goBack.getStyleClass().add("goBackButton");
+    }
+
+    public void rollbackCreateButton(final MouseEvent event)
+    {
+        goBack.getStyleClass().clear();
+        goBack.getStyleClass().add("highlightGoBackButton");
     }
 }

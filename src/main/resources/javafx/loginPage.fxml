@@ -1,14 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.pap.view.pages.LoginPage"
-      fx:id="loginPage">
-    <TextField fx:id="usernameField" promptText="Enter username" styleClass="field"/>
-    <PasswordField fx:id="passwordField" promptText="Enter password" styleClass="field"/>
-    <Button fx:id="login" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#tryToLogIn"
-            text="Sign In" textAlignment="CENTER"/>
-    <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" text="Create Account" onAction="#createUser"/>
-</VBox>
+<BorderPane fx:id="root" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pap.view.pages.LoginPage">
+   <center>
+      <HBox prefHeight="678.0" prefWidth="1003.0">
+         <Pane style="-fx-background-color: #AF192FFF;" HBox.hgrow="ALWAYS"/>
+         <BorderPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+            <top>
+               <Label alignment="CENTER" prefHeight="108.0" prefWidth="381.0" text="TO DO List"
+                      BorderPane.alignment="CENTER">
+                  <font>
+                     <Font name="Viner Hand ITC" size="48.0"/>
+                  </font>
+                  <BorderPane.margin>
+                     <Insets top="40.0"/>
+                  </BorderPane.margin>
+               </Label>
+            </top>
+            <center>
+               <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Welcome to To Do List"
+                         textAlignment="CENTER" textFill="#797878" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="Bell MT" size="24.0"/>
+                     </font>
+                     <VBox.margin>
+                        <Insets top="40.0"/>
+                     </VBox.margin>
+                  </Label>
+                  <Label maxWidth="1.7976931348623157E308" text="Username">
+                     <VBox.margin>
+                        <Insets top="40.0"/>
+                     </VBox.margin>
+                     <font>
+                        <Font name="Bell MT" size="18.0"/>
+                     </font>
+                     <padding>
+                        <Insets left="80.0"/>
+                     </padding>
+                  </Label>
+                  <TextField fx:id="usernameField" promptText="Enter username">
+                     <VBox.margin>
+                        <Insets left="80.0" right="80.0"/>
+                     </VBox.margin>
+                  </TextField>
+                  <Label maxWidth="1.7976931348623157E308" text="Password">
+                     <VBox.margin>
+                        <Insets top="20.0"/>
+                     </VBox.margin>
+                     <font>
+                        <Font name="Bell MT" size="18.0"/>
+                     </font>
+                     <padding>
+                        <Insets left="80.0"/>
+                     </padding>
+                  </Label>
+                  <PasswordField fx:id="passwordField" maxWidth="1.7976931348623157E308" promptText="Enter password">
+                     <VBox.margin>
+                        <Insets left="80.0" right="80.0"/>
+                     </VBox.margin>
+                  </PasswordField>
+                  <Button fx:id="login" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                          onAction="#tryToLogIn" onMouseEntered="#highlightLoginButton"
+                          onMouseExited="#rollbackLoginButton" prefHeight="40.0" prefWidth="90.0"
+                          styleClass="loginButton" text="Sign In" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Bell MT" size="20.0"/>
+                     </font>
+                     <VBox.margin>
+                        <Insets top="50.0"/>
+                     </VBox.margin>
+                  </Button>
+                  <HBox alignment="CENTER">
+                     <VBox.margin>
+                        <Insets top="40.0"/>
+                     </VBox.margin>
+                     <Line endX="100.0" startX="-100.0"/>
+                     <Label text="Or">
+                        <HBox.margin>
+                           <Insets left="10.0" right="10.0"/>
+                        </HBox.margin>
+                        <font>
+                           <Font name="Bell MT" size="12.0"/>
+                        </font>
+                     </Label>
+                     <Line endX="100.0" startX="-100.0"/>
+                  </HBox>
+                  <Button fx:id="create" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                          onAction="#createUser" onMouseEntered="#highlightCreateButton"
+                          onMouseExited="#rollbackCreateButton" prefHeight="40.0" prefWidth="160.0"
+                          styleClass="createButton" text="Create Account" textFill="#fffbfb">
+                     <VBox.margin>
+                        <Insets top="40.0"/>
+                     </VBox.margin>
+                     <font>
+                        <Font name="Bell MT" size="20.0"/>
+                     </font>
+                  </Button>
+               </VBox>
+            </center>
+         </BorderPane>
+      </HBox>
+   </center>
+   <bottom>
+      <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefWidth="999.0" style="-fx-border-color: black;" text="Created By Michal Brus and Maciej Bukalo" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="10.0" top="5.0" />
+         </padding>
+         <font>
+            <Font name="Bell MT Italic" size="12.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </Label>
+   </bottom>
+</BorderPane>

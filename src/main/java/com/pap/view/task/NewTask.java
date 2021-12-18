@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 @Slf4j
 public class NewTask extends HBox implements Remove, Add {
@@ -64,7 +64,7 @@ public class NewTask extends HBox implements Remove, Add {
             final var newTask = Task.builder()
                     .withTitle(textField.getText())
                     .withCreationTime(LocalDateTime.now())
-                    .withDueDate(LocalDateTime.of(datePicker.getValue(), LocalTime.now(ZoneId.of("Europe/Warsaw"))))
+                    .withDueDate(LocalDateTime.of(datePicker.getValue(), LocalTime.parse(hourText.get(), DateTimeFormatter.ISO_TIME)))
                     .withId(textField.getText())
                     .withStatus(Status.TO_DO)
                     .withUser(userSession.getUsername())

@@ -3,6 +3,7 @@ package com.pap.view.pages;
 import com.pap.consts.StageDefault;
 import com.pap.database.user.LastLogin;
 import com.pap.session.UserSession;
+import com.pap.view.alerts.AlertFactory;
 import com.pap.view.stage.StylesheetInitializer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,10 +12,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,8 @@ import java.time.LocalDateTime;
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class LoginPage {
+    private static final String DIALOG_TITLE = "Login Failed";
+    private static final String DIALOG_CONTENT = "Incorrect password or username";
 
     @Value("classpath:/javafx/mainStage.fxml")
     private Resource mainStageResource;
@@ -45,6 +48,9 @@ public class LoginPage {
     private final StageDefault stageDefault;
 
     @FXML
+    public BorderPane root;
+
+    @FXML
     public TextField usernameField;
 
     @FXML
@@ -54,7 +60,8 @@ public class LoginPage {
     public Button login;
 
     @FXML
-    public VBox loginPage;
+    public Button create;
+
 
     public void tryToLogIn(final ActionEvent event) throws IOException
     {
@@ -65,10 +72,7 @@ public class LoginPage {
         }
         else
         {
-            final var label = new Label("INCORRECT PASSWORD");
-            label.getStyleClass().add("incorrect-username-or-password");
-            loginPage.getChildren().add(label);
-
+            AlertFactory.createErrorDialog(DIALOG_TITLE,DIALOG_CONTENT).show();
             log.warn("Username {} failed to login",usernameField.getText());
         }
     }
@@ -109,4 +113,30 @@ public class LoginPage {
         log.info("Successful login to application by user {}", usernameField.getText());
 
     }
+
+    public void highlightLoginButton(final MouseEvent event)
+    {
+        login.getStyleClass().clear();
+        login.getStyleClass().add("highlightLoginButton");
+    }
+
+    public void rollbackLoginButton(final MouseEvent event)
+    {
+        login.getStyleClass().clear();
+        login.getStyleClass().add("loginButton");
+    }
+
+
+    public void highlightCreateButton(final MouseEvent event)
+    {
+        create.getStyleClass().clear();
+        create.getStyleClass().add("createButton");
+    }
+
+    public void rollbackCreateButton(final MouseEvent event)
+    {
+        create.getStyleClass().clear();
+        create.getStyleClass().add("highlightCreateButton");
+    }
+
 }

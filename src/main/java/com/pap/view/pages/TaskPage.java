@@ -7,11 +7,14 @@ import com.pap.session.UserSession;
 import com.pap.view.task.NewTask;
 import com.pap.view.task.TaskInstance;
 import com.pap.view.task.buttons.TaskEvents;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @Component
 public class TaskPage extends DefaultPage<NewTask> implements TaskEvents {
     private final TaskRepository taskRepository;
@@ -37,8 +40,15 @@ public class TaskPage extends DefaultPage<NewTask> implements TaskEvents {
     @Override
     public void addTask(final Task task)
     {
-        taskRepository.insert(task);
-        addTaskToGridPane(task);
+        try
+        {
+            taskRepository.insert(task);
+            addTaskToGridPane(task);
+        }
+        catch (final DataAccessException e)
+        {
+            log.error("Incorrect task name. Names must be distinct {} !!!", task.getTitle());
+        }
     }
 
     private void addTaskToGridPane(final Task task)

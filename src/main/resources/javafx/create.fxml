@@ -1,15 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-
-<VBox fx:id="root" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.pap.view.pages.CreateUserPage"
-      alignment="CENTER">
-   <TextField promptText="Type username" fx:id="username"/>
-   <TextField promptText="Type email" fx:id="email"/>
-   <PasswordField promptText="Type password" fx:id="password"/>
-   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Create user" onAction="#tryAddingUser"/>
-   <Button contentDisplay="CENTER" mnemonicParsing="false" text="Go back to login" onAction="#goBackToLogin"/>
-</VBox>
+<BorderPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pap.view.pages.CreateUserPage">
+   <bottom>
+      <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="Created By Michal Brus and Maciej Bukalo" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Bell MT Italic" size="12.0" />
+         </font>
+         <padding>
+            <Insets bottom="10.0" top="5.0" />
+         </padding></Label>
+   </bottom>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <Pane prefWidth="297.0" style="-fx-background-color: #913e4a;"/>
+         <VBox fx:id="root" alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+            <Label text="Create User" textFill="#757575">
+               <font>
+                  <Font name="Bell MT" size="36.0"/>
+               </font>
+               <VBox.margin>
+                  <Insets top="200.0"/>
+               </VBox.margin>
+            </Label>
+            <Label maxWidth="1.7976931348623157E308" text="Username">
+               <font>
+                  <Font name="Bell MT" size="18.0"/>
+               </font>
+               <VBox.margin>
+                  <Insets top="40.0"/>
+               </VBox.margin>
+               <padding>
+                  <Insets left="80.0"/>
+               </padding>
+            </Label>
+            <TextField fx:id="username" promptText="Type username">
+               <VBox.margin>
+                  <Insets left="80.0" right="80.0"/>
+               </VBox.margin>
+            </TextField>
+            <Label maxWidth="1.7976931348623157E308" text="Email">
+               <padding>
+                  <Insets left="80.0"/>
+               </padding>
+               <font>
+                  <Font name="Bell MT" size="18.0"/>
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0"/>
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="email" promptText="Type email">
+               <VBox.margin>
+                  <Insets left="80.0" right="80.0"/>
+               </VBox.margin>
+            </TextField>
+            <Label maxWidth="1.7976931348623157E308" text="Password">
+               <padding>
+                  <Insets left="80.0"/>
+               </padding>
+               <font>
+                  <Font name="Bell MT" size="18.0"/>
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0"/>
+               </VBox.margin>
+            </Label>
+            <PasswordField fx:id="password" promptText="Type password">
+               <VBox.margin>
+                  <Insets left="80.0" right="80.0"/>
+               </VBox.margin>
+            </PasswordField>
+            <Button fx:id="create" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                    onAction="#tryAddingUser" onMouseEntered="#highlightCreateButton"
+                    onMouseExited="#rollbackCreateButton" prefHeight="40.0" prefWidth="120.0"
+                    styleClass="createUserButton" text="Create user" textFill="#fffdfd">
+               <VBox.margin>
+                  <Insets top="50.0"/>
+               </VBox.margin>
+               <font>
+                  <Font name="Bell MT" size="20.0"/>
+               </font>
+            </Button>
+            <HBox alignment="CENTER">
+               <VBox.margin>
+                  <Insets top="20.0"/>
+               </VBox.margin>
+               <Line endX="100.0" startX="-100.0"/>
+               <Label text="Or">
+                  <HBox.margin>
+                     <Insets left="10.0" right="10.0"/>
+                  </HBox.margin>
+                  <font>
+                     <Font name="Bell MT" size="12.0"/>
+                  </font>
+               </Label>
+               <Line endX="100.0" startX="-100.0"/>
+            </HBox>
+            <Button fx:id="goBack" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                    onAction="#goBackToLogin" onMouseEntered="#highlightGoBackButton"
+                    onMouseExited="#rollbackGoBackButton" prefHeight="45.0" prefWidth="175.0" styleClass="goBackButton"
+                    text="Go back to login" textFill="WHITE">
+               <VBox.margin>
+                  <Insets top="20.0"/>
+               </VBox.margin>
+               <font>
+                  <Font size="20.0"/>
+               </font>
+            </Button>
+         </VBox>
+      </HBox>
+   </center>
+</BorderPane>
