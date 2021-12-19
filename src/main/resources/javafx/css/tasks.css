@@ -1,14 +1,16 @@
 .default-grid-pane{
     -fx-pref-height: 600;
-    -fx-pref-width: 600;
-    -fx-hgap: 20;
-    -fx-vgap: 20;
-    -fx-padding: 20,0,0,0;
+    -fx-pref-width: 800;
+    /*-fx-hgap: 20;*/
+    /*-fx-vgap: 20;*/
+    /*-fx-padding: 20,0,0,0;*/
 }
 
 .task-text-field{
-    -fx-pref-width: 350;
+    /*-fx-pref-width: 350;*/
     -fx-pref-height: 40;
+    -fx-font-family: "Bell MT";
+    -fx-text-fill: #ffffff;
 }
 
 .hour-picker{

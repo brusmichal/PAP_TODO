@@ -4,10 +4,12 @@ import com.pap.Pap21zZ25Application;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 
+@Slf4j
 public class TaskApplication extends Application {
 
     private ConfigurableApplicationContext applicationContext;
@@ -27,6 +29,7 @@ public class TaskApplication extends Application {
     @Override
     public void stop()
     {
+        log.info("Application closure");
         applicationContext.close();
         Platform.exit();
     }

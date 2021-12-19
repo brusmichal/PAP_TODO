@@ -102,6 +102,7 @@ public class CreateUserPage {
         stylesheetInitializer.addFilesToScene(newScene);
         stage.setScene(newScene);
         stage.show();
+        log.info("Change scene to Login Page");
     }
 
     private Parent getParentFromFXML(final Resource resource) throws IOException

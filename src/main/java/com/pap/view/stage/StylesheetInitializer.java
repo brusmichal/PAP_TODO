@@ -1,6 +1,7 @@
 package com.pap.view.stage;
 
 import javafx.scene.Scene;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 public class StylesheetInitializer {
 
@@ -36,6 +38,7 @@ public class StylesheetInitializer {
                     }})
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+        log.info("Loaded {} stylesheet files in summary",cssFiles.size());
     }
 
     public void addFilesToScene(final Scene scene)

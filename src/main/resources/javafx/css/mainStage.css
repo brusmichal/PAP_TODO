@@ -1,25 +1,48 @@
 .switch-button-off{
-        -fx-background-color: #ffffff;
+        -fx-background-color: #c24545;
+        -fx-font-family: "Bell MT";
+        -fx-text-fill: #ffffff;
         -fx-font-size: 20;
-        -fx-font-family: "Lucida Console";
         -fx-pref-width: 200;
         -fx-pref-height: 80;
         -fx-alignment: center;
 }
 
 .switch-button-on{
-        -fx-background-color: #ff0000;
+        -fx-background-color: #882525;
+        -fx-font-family: "Bell MT";
+        -fx-text-fill: #ffffff;
         -fx-font-size: 20;
-        -fx-font-family: "Lucida Console";
+        -fx-pref-width: 200;
+        -fx-pref-height: 80;
+        -fx-alignment: center;
+}
+
+.highlight-page-button{
+        -fx-background-color: #ce2b2b;
+        -fx-font-family: "Bell MT";
+        -fx-text-fill: #ffffff;
+        -fx-font-size: 20;
         -fx-pref-width: 200;
         -fx-pref-height: 80;
         -fx-alignment: center;
 }
 
 .log-out-button{
-        -fx-background-color: #ff0000;
+        -fx-background-color: #b22a15;
+        -fx-font-family: "Bell MT";
+        -fx-text-fill: #ffffff;
         -fx-font-size: 20;
-        -fx-font-family: "Lucida Console";
+        -fx-pref-width: 200;
+        -fx-pref-height: 80;
+        -fx-alignment: center;
+}
+
+.highlight-log-out-button{
+        -fx-background-color: #b24937;
+        -fx-font-family: "Bell MT";
+        -fx-text-fill: #ffffff;
+        -fx-font-size: 20;
         -fx-pref-width: 200;
         -fx-pref-height: 80;
         -fx-alignment: center;

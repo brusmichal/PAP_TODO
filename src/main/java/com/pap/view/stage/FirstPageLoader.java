@@ -39,6 +39,7 @@ public class FirstPageLoader {
             userSession.addUserSession(lastUserLogin);
             return mainApplication.getURL();
         }
+        log.info("Redirected to login page");
         return  loginPage.getURL();
     }
 }

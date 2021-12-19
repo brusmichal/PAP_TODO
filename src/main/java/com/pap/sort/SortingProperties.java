@@ -4,6 +4,7 @@ import com.pap.util.yaml.YamlPropertySourceFactory;
 import com.pap.view.task.TaskInstance;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+@Slf4j
 @Component
 @PropertySource(value = "classpath:sorting/sorting.yml", factory = YamlPropertySourceFactory.class)
 public class SortingProperties {
@@ -39,6 +40,7 @@ public class SortingProperties {
             var newComparator = constructor.newInstance();
             comparators.put(key, (Comparator<TaskInstance>) newComparator);
         }
+        log.info("Loaded {} taks comparators to use in Done page",comparators.size());
     }
 
     private Map<String, String> getDescriptionsAndClasses()

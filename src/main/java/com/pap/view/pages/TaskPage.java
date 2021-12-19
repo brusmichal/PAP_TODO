@@ -31,6 +31,7 @@ public class TaskPage extends DefaultPage<NewTask> implements TaskEvents {
         {
             taskRepository.getTasksByUserAndStatus(userSession.getUsername(), Status.TO_DO)
                     .forEach(this::addTaskToGridPane);
+            log.info("Task page fully loaded and is composed of {} tasks", tasks.size());
         }
 
     }
@@ -54,7 +55,11 @@ public class TaskPage extends DefaultPage<NewTask> implements TaskEvents {
     private void addTaskToGridPane(final Task task)
     {
         final var taskInstance = TaskInstance.fromTask(task,this);
-        gridPane.add(taskInstance,0,tasks.size());
+        vBox.getChildren().add(taskInstance);
+        if(tasks.size()%2 == 0)
+            taskInstance.getStyleClass().add("odd-instance");
+        else
+            taskInstance.getStyleClass().add("equal-instance");
         tasks.add(taskInstance);
     }
 
@@ -86,7 +91,7 @@ public class TaskPage extends DefaultPage<NewTask> implements TaskEvents {
     {
         taskRepository.insert(task);
         getInstanceFromChildren(task).ifPresent(instance -> {
-            gridPane.getChildren().remove(instance);
+            vBox.getChildren().remove(instance);
             addTasksToGridPane();
         });
     }

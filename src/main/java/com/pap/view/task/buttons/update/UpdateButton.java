@@ -1,7 +1,7 @@
 package com.pap.view.task.buttons.update;
 
 import com.pap.database.task.Task;
-import com.pap.view.task.buttons.DisabledButton;
+import com.pap.view.task.buttons.custom.DisabledButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 

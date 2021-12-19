@@ -18,15 +18,22 @@
 }
 
 .vbox-style{
-    -fx-pref-width: 500;
     -fx-text-alignment: center;
     -fx-alignment: center;
 }
 
 .instance{
-    -fx-pref-width: 600;
+    -fx-font-family: "Bell MT";
+    -fx-text-fill: #ffffff;
     -fx-pref-height: 80;
-    -fx-background-color: #af9019;
     -fx-alignment: center;
-    -fx-border-color: #000000;
+    /*-fx-border-color: #000000;*/
+}
+
+.equal-instance{
+    -fx-background-color: #de7b40;
+}
+
+.odd-instance{
+    -fx-background-color: #f89b62;
 }

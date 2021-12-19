@@ -5,7 +5,6 @@ import com.pap.session.UserSession;
 import com.pap.view.task.TaskInstance;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
@@ -16,24 +15,25 @@ import java.util.Optional;
 public class  DefaultPage<T extends Node> extends VBox {
     protected final UserSession userSession;
     protected final List<TaskInstance> tasks;
-    protected final GridPane gridPane;
+    protected final VBox vBox;
     protected  T lowerPanel;
     protected final ScrollPane scrollPane;
 
     protected DefaultPage(final UserSession userSession)
     {
+        getStyleClass().add("default-p");
         this.userSession = userSession;
         this.tasks = new ArrayList<>();
-        this.gridPane = new GridPane();
+        this.vBox = new VBox();
         this.scrollPane = new ScrollPane();
 
-        gridPane.getStyleClass().add("default-grid-pane");
+        vBox.getStyleClass().add("default-grid-pane");
         setUpScrollPane();
     }
 
     private void setUpScrollPane()
     {
-        scrollPane.setContent(gridPane);
+        scrollPane.setContent(vBox);
         scrollPane.setFitToWidth(true);
     }
 
@@ -52,7 +52,7 @@ public class  DefaultPage<T extends Node> extends VBox {
 
     protected void addTasksToGridPane()
     {
-        gridPane.getChildren().clear();
-        tasks.forEach(task -> gridPane.add(task, 0, tasks.indexOf(task)));
+        vBox.getChildren().clear();
+        tasks.forEach(task -> vBox.getChildren().add(task));
     }
 }

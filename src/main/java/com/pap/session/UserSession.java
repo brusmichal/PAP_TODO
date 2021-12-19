@@ -38,10 +38,11 @@ public class UserSession implements AlterUserSession{
         if(this.username == null)
         {
             this.username = username;
+            log.info("User {} has started session", username);
         }
         else
         {
-            log.info("Session user is already set!!!");
+            log.warn("Session user is already set!!!");
         }
     }
 }

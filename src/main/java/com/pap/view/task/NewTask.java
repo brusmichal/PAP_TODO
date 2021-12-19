@@ -9,7 +9,9 @@ import com.pap.view.task.buttons.remove.Remove;
 import com.pap.view.task.buttons.remove.RemoveButton;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
@@ -39,6 +41,7 @@ public class NewTask extends HBox implements Remove, Add {
         this.add = add;
         this.userSession = userSession;
 
+        GridPane.setHgrow(this, Priority.ALWAYS);
         this.getChildren().addAll(textField,hourPicker,datePicker,clearButton, addButton);
         datePicker.setValue(LocalDate.now());
         clearButton.getStyleClass().add(CLEAR_STYLE);
@@ -69,8 +72,10 @@ public class NewTask extends HBox implements Remove, Add {
                     .withStatus(Status.TO_DO)
                     .withUser(userSession.getUsername())
                     .build();
+            log.info("New task is ready to be processed ... [{}]",newTask.getTitle());
             add.addTask(newTask);
             removeTask(newTask);
+            log.info("Successfully added task named: {}", newTask.getTitle());
         }
         else
         {

@@ -5,11 +5,18 @@ import com.pap.session.UserSession;
 import com.pap.sort.SortingProperties;
 import com.pap.view.pages.DonePage;
 import com.pap.view.pages.TaskPage;
+import com.pap.view.task.buttons.custom.ActiveButton;
+import com.pap.view.task.buttons.custom.HighlightableButton;
+import com.pap.view.task.buttons.factory.ButtonFactory;
+import com.pap.view.task.buttons.factory.ButtonTypes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,20 +38,19 @@ public class MainStage {
     private final SortingProperties sortingProperties;
 
     private Node currentPage;
-    private List<Button> buttons;
+    private List<ActiveButton> buttons;
 
     @FXML
     private HBox root;
     @FXML
-    private Button taskButton;
-    @FXML
-    private Button doneButton;
-    @FXML
-    private Button reportsButton;
-    @FXML
-    private Button logout;
+    private VBox vBox;
 
+    private final ActiveButton taskButton;
+    private final ActiveButton doneButton;
+    private final ActiveButton reportsButton;
+    private final HighlightableButton logout;
 
+    private final Region emptyRegion;
 
     @Autowired
     public MainStage(final TaskRepository taskRepository, final UserSession userSession, final SortingProperties sortingProperties)
@@ -53,6 +59,21 @@ public class MainStage {
         this.userSession = userSession;
         this.sortingProperties = sortingProperties;
         this.currentPage = new TaskPage(taskRepository,userSession);
+
+        taskButton = ButtonFactory.createActiveButtonTurnedOn(ButtonTypes.TASKS,ButtonTypes.ACTIVE_STYLE);
+        doneButton = ButtonFactory.createActiveButton(ButtonTypes.DONE,ButtonTypes.ACTIVE_STYLE);
+        reportsButton = ButtonFactory.createActiveButton(ButtonTypes.REPORTS,ButtonTypes.ACTIVE_STYLE);
+        logout = ButtonFactory.createButtonWithStyle(ButtonTypes.LOGOUT);
+
+        taskButton.setActive(true);
+        taskButton.setOnAction(this::goToTaskPage);
+        doneButton.setOnAction(this::goToDonePage);
+        reportsButton.setOnAction(this::goToReportPage);
+
+        logout.setOnAction(this::exitApplication);
+
+        emptyRegion = new Region();
+        VBox.setVgrow(emptyRegion, Priority.ALWAYS);
     }
 
     @FXML
@@ -61,6 +82,9 @@ public class MainStage {
         root.getChildren().add(currentPage);
         setTasksPage();
         buttons = List.of(taskButton,doneButton,reportsButton);
+        vBox.getChildren().addAll(buttons);
+        vBox.getChildren().add(emptyRegion);
+        vBox.getChildren().add(logout);
     }
 
     public void goToTaskPage(final ActionEvent event)
@@ -105,16 +129,19 @@ public class MainStage {
         root.getChildren().add(currentPage);
     }
 
-    private void pickPage(final Button buttonPressed)
+    private void pickPage(final ActiveButton buttonPressed)
     {
         buttonPressed.getStyleClass().clear();
         buttonPressed.getStyleClass().add(BUTTON_ON);
+        buttonPressed.setActive(true);
         buttons.stream()
                 .filter(button -> !button.equals(buttonPressed))
                 .forEach(button-> {
                     button.getStyleClass().clear();
                     button.getStyleClass().add(BUTTON_OFF);
+                    button.setActive(false);
                 });
+        log.info("Page during change ...");
     }
 
 
@@ -128,4 +155,17 @@ public class MainStage {
         userSession.getLastLoginRepository().save(lastLogin);
         log.info("User {} was successfully log out",lastLogin.getUsername());
     }
+
+    public void highlightLogoutButton(final MouseEvent event)
+    {
+        logout.getStyleClass().clear();
+        logout.getStyleClass().add("highlight-log-out-button");
+    }
+
+    public void rollbackLogoutButton(final MouseEvent event)
+    {
+        logout.getStyleClass().clear();
+        logout.getStyleClass().add("log-out-button");
+    }
+
 }

@@ -10,9 +10,11 @@ import com.pap.view.sort.SortingPanel;
 import com.pap.view.task.TaskInstance;
 import com.pap.view.task.buttons.remove.Remove;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Comparator;
 
+@Slf4j
 @Getter
 public class DonePage extends DefaultPage<SortingPanel> implements Remove, Sort {
     private final TaskRepository taskRepository;
@@ -26,16 +28,15 @@ public class DonePage extends DefaultPage<SortingPanel> implements Remove, Sort 
         setUpVBox();
         taskRepository.getTasksByUserAndStatus(userSession.getUsername(), Status.DONE)
                 .forEach(this::addTask);
-
+       log.info("Done page fully loaded and is composed of {} done tasks", tasks.size());
     }
 
 
     public void addTask(final Task task)
     {
         final var taskInstance = TaskInstance.ofDoneTask(task,this);
-        gridPane.add(taskInstance,0,tasks.size());
+        vBox.getChildren().add(taskInstance);
         tasks.add(taskInstance);
-
     }
 
     @Override
@@ -55,6 +56,7 @@ public class DonePage extends DefaultPage<SortingPanel> implements Remove, Sort 
     {
         tasks.sort(comparator);
         addTasksToGridPane();
+        log.info("Tasks were successfully sorted");
     }
 
 }

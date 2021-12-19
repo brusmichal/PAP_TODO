@@ -9,3 +9,16 @@ spring:
       host: localhost
   main:
     web-application-type: none
+  application:
+    name: pap21zZ25
+logging:
+  file:
+    name: logback-spring.xml
+#  Show queries in logs
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG

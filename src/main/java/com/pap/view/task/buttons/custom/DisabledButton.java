@@ -1,4 +1,4 @@
-package com.pap.view.task.buttons;
+package com.pap.view.task.buttons.custom;
 
 import javafx.scene.control.Button;
 
