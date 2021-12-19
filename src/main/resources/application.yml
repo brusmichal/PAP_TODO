@@ -22,3 +22,8 @@ logging:
           mongodb:
             core:
               MongoTemplate: DEBUG
+sorting:
+  classes:
+    com.pap.sort.AlphabeticalSort: Alphabetically
+    com.pap.sort.DueDateSort: Due date
+    com.pap.sort.DateCreatedSort: Date created
