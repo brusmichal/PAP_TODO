@@ -21,7 +21,6 @@ public class  DefaultPage<T extends Node> extends VBox {
 
     protected DefaultPage(final UserSession userSession)
     {
-        getStyleClass().add("default-p");
         this.userSession = userSession;
         this.tasks = new ArrayList<>();
         this.vBox = new VBox();
@@ -50,9 +49,33 @@ public class  DefaultPage<T extends Node> extends VBox {
                 .findFirst();
     }
 
+    protected void addTaskWithStyle(final TaskInstance taskInstance)
+    {
+        vBox.getChildren().add(taskInstance);
+        if(tasks.size()%2 == 0)
+            taskInstance.getStyleClass().add("odd-instance");
+        else
+            taskInstance.getStyleClass().add("equal-instance");
+        tasks.add(taskInstance);
+    }
+
     protected void addTasksToGridPane()
     {
         vBox.getChildren().clear();
+        for(var i = 0; i < tasks.size(); i++)
+        {
+
+            if(i%2 == 0)
+            {
+                tasks.get(i).getStyleClass().remove("equal-instance");
+                tasks.get(i).getStyleClass().add("odd-instance");
+            }
+            else
+            {
+                tasks.get(i).getStyleClass().remove("odd-instance");
+                tasks.get(i).getStyleClass().add("equal-instance");
+            }
+        }
         tasks.forEach(task -> vBox.getChildren().add(task));
     }
 }

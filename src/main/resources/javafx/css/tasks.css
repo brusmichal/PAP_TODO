@@ -1,23 +1,31 @@
 .default-grid-pane{
-    -fx-pref-height: 600;
-    -fx-pref-width: 800;
-    /*-fx-hgap: 20;*/
-    /*-fx-vgap: 20;*/
-    /*-fx-padding: 20,0,0,0;*/
+    -fx-pref-height: 700;
+    -fx-pref-width: 824;
+    -fx-background-color: #d3a389;
 }
 
 .task-text-field{
-    /*-fx-pref-width: 350;*/
     -fx-pref-height: 40;
-    -fx-font-family: "Bell MT";
-    -fx-text-fill: #ffffff;
+    -fx-font-size: 25px;
 }
 
 .hour-picker{
     -fx-text-fill: #000000;
+    -fx-font-size: 25px;
+    -fx-pref-height: 40;
+    -fx-pref-width: 100;
 }
 
 .hour-picker-bad{
     -fx-text-fill: #ce0e0e;
+    -fx-font-size: 25px;
+    -fx-pref-height: 40;
+    -fx-pref-width: 140;
 }
+
+.date-picker{
+    -fx-font-size: 25px;
+    -fx-pref-width: 200;
+}
+
 

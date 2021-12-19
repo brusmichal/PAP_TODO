@@ -67,8 +67,8 @@ public class LoginPage {
     {
         if(checkIfUserIsValid(usernameField.getText(),passwordField.getText()))
         {
-            generateNewScene(mainStageResource,event);
             createUserSession();
+            generateNewScene(mainStageResource,event);
         }
         else
         {

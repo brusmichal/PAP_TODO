@@ -19,13 +19,13 @@ public class HighlightableButton extends Button {
 
     void highlightLoginButton(final MouseEvent event)
     {
-        getStyleClass().clear();
+        getStyleClass().remove(normalStyle);
         getStyleClass().add(highlightedStyle);
     }
 
     void rollbackLoginButton(final MouseEvent event)
     {
-        getStyleClass().clear();
+        getStyleClass().remove(highlightedStyle);
         getStyleClass().add(normalStyle);
     }
 }

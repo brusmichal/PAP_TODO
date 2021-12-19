@@ -17,11 +17,11 @@ public class HourPicker extends TextField {
     {
         if(getText().matches(HOUR_FORMAT))
         {
-            getStyleClass().clear();
+            getStyleClass().remove("hour-picker-bad");
             getStyleClass().add("hour-picker");
             return Optional.of(getText());
         }
-        getStyleClass().clear();
+        getStyleClass().remove("hour-picker");
         getStyleClass().add("hour-picker-bad");
         return Optional.empty();
     }

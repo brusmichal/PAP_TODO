@@ -9,7 +9,6 @@ import com.pap.view.task.buttons.remove.Remove;
 import com.pap.view.task.buttons.remove.RemoveButton;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +21,7 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class NewTask extends HBox implements Remove, Add {
     private final static String TEXT_STYLE = "task-text-field";
-    private final static String CLEAR_STYLE = "task-text-field";
+    private final static String CLEAR_STYLE = "clear-button";
 
     private final TextField textField;
     private final HourPicker hourPicker;
@@ -41,7 +40,7 @@ public class NewTask extends HBox implements Remove, Add {
         this.add = add;
         this.userSession = userSession;
 
-        GridPane.setHgrow(this, Priority.ALWAYS);
+        HBox.setHgrow(textField, Priority.ALWAYS);
         this.getChildren().addAll(textField,hourPicker,datePicker,clearButton, addButton);
         datePicker.setValue(LocalDate.now());
         clearButton.getStyleClass().add(CLEAR_STYLE);
@@ -49,6 +48,9 @@ public class NewTask extends HBox implements Remove, Add {
 
         textField.getStyleClass().add(TEXT_STYLE);
         textField.setPromptText("Write your task");
+
+        datePicker.getStyleClass().add("date-picker");
+        hourPicker.getStyleClass().add("hour-picker");
 
     }
 

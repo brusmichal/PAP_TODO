@@ -18,11 +18,6 @@ public class RemoveButton extends DisabledButton implements EventHandler<ActionE
         this.remove = remove;
         this.setOnAction(this);
         this.getStyleClass().add(REMOVE_BUTTON);
-//        this.setMaxWidth(Double.MAX_VALUE);
-//        final var image = new Image(getClass().getResourceAsStream(REMOVE_IMAGE));
-//        final var imageView = new ImageView(image);
-//        this.setGraphic(imageView);
-//        this.setContentDisplay(ContentDisplay.CENTER);
     }
 
     @Override

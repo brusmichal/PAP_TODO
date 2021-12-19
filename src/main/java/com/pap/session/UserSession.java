@@ -8,11 +8,13 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Getter
 @Component
+@DependsOn({"userRepository","lastLoginRepository"})
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserSession implements AlterUserSession{
     private final UserRepository userRepository;

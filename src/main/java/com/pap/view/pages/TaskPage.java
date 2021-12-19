@@ -33,9 +33,7 @@ public class TaskPage extends DefaultPage<NewTask> implements TaskEvents {
                     .forEach(this::addTaskToGridPane);
             log.info("Task page fully loaded and is composed of {} tasks", tasks.size());
         }
-
     }
-
 
 
     @Override
@@ -55,13 +53,9 @@ public class TaskPage extends DefaultPage<NewTask> implements TaskEvents {
     private void addTaskToGridPane(final Task task)
     {
         final var taskInstance = TaskInstance.fromTask(task,this);
-        vBox.getChildren().add(taskInstance);
-        if(tasks.size()%2 == 0)
-            taskInstance.getStyleClass().add("odd-instance");
-        else
-            taskInstance.getStyleClass().add("equal-instance");
-        tasks.add(taskInstance);
+        addTaskWithStyle(taskInstance);
     }
+
 
     @Override
     public void finishTask(final Task task)

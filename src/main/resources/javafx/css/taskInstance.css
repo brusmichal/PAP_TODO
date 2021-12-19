@@ -1,16 +1,19 @@
 .over-date{
     -fx-text-fill: #ce0e0e;
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
+    -fx-font-family: "Bell MT Bold";
 }
 
 .before-date{
     -fx-text-fill: #11ce13;
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
+    -fx-font-family: "Bell MT Bold";
 }
 
 .neutral-date{
     -fx-text-fill: #000000;
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
+    -fx-font-family: "Bell MT Bold";
 }
 
 .top-bottom-margin{
@@ -18,16 +21,16 @@
 }
 
 .vbox-style{
-    -fx-text-alignment: center;
-    -fx-alignment: center;
+    /*-fx-text-alignment: center;*/
+    /*-fx-alignment: center;*/
 }
 
 .instance{
     -fx-font-family: "Bell MT";
     -fx-text-fill: #ffffff;
+    -fx-font-size: 26px;
     -fx-pref-height: 80;
-    -fx-alignment: center;
-    /*-fx-border-color: #000000;*/
+    -fx-text-alignment: center;
 }
 
 .equal-instance{

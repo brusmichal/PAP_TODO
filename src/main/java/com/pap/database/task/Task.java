@@ -1,10 +1,8 @@
 package com.pap.database.task;
 
 import com.pap.database.Status;
-import com.pap.database.user.User;
 import lombok.Builder;
 import lombok.Data;
-
 import lombok.NonNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -42,6 +40,9 @@ public class Task {
 
     // Real time when the task was finished
     private LocalDateTime endTime;
+
+    // Time when popup should be presented to user if the task is near expire date
+    private LocalDateTime reminder;
 
     // Owner of the task
     private final String user;

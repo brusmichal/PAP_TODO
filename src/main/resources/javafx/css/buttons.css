@@ -1,21 +1,20 @@
 .clear-button{
     -fx-background-color: #af1919;
-    -fx-max-height: 40;
-    -fx-max-width: 40;
+    -fx-min-height: 51;
+    -fx-min-width: 60;
     -fx-background-image: url('/images/clear.png');
     -fx-background-position: center;
-    -fx-background-size: 30px;
+    -fx-background-size: 80px;
     -fx-background-repeat: no-repeat;
 }
 .add-button{
-    /*-fx-background-color: #1eaf19;*/
-    -fx-max-height: 40;
-    -fx-max-width: 40;
-    -fx-background-image: url('/images/add.png');
+    -fx-pref-height: 60;
+    -fx-pref-width: 60;
+    -fx-background-image: url('/images/finish.png');
     -fx-background-position: center;
-    -fx-background-size: 30px;
+    -fx-background-size: 60px;
     -fx-background-repeat: no-repeat;
-    /*-fx-background-position: 100%;*/
+    -fx-background-color: #1eaf19;
 }
 
 .finish-button{

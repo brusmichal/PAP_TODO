@@ -35,8 +35,7 @@ public class DonePage extends DefaultPage<SortingPanel> implements Remove, Sort 
     public void addTask(final Task task)
     {
         final var taskInstance = TaskInstance.ofDoneTask(task,this);
-        vBox.getChildren().add(taskInstance);
-        tasks.add(taskInstance);
+        addTaskWithStyle(taskInstance);
     }
 
     @Override

@@ -10,6 +10,8 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import lombok.AccessLevel;
@@ -31,6 +33,7 @@ public class TaskInstance extends HBox {
     private final Button removeButton;
     private final Button changeDueDateButton;
     private final Button finishTaskButton;
+    private final Region emptyRegion = new Region();
 
     /**
      * Generate graphical representation of task, which can be deleted, altered or set as completed.
@@ -85,6 +88,7 @@ public class TaskInstance extends HBox {
         final var title =  new Label(task.getTitle());
         title.setText(task.getTitle());
         title.setTextAlignment(TextAlignment.CENTER);
+        title.setPadding(new Insets(20,0,0,20));
         return title;
     }
 
@@ -94,7 +98,7 @@ public class TaskInstance extends HBox {
         final var dateLabel = new Label(date);
         final var style = getStyle(before);
         dateLabel.getStyleClass().add(style);
-
+        dateLabel.setPadding(new Insets(0,0,0,20));
         return dateLabel;
     }
 
@@ -104,18 +108,21 @@ public class TaskInstance extends HBox {
         final var dateLabel = new Label(date);
         final var style = getStyle(null);
         dateLabel.getStyleClass().add(style);
-
+        dateLabel.setPadding(new Insets(0,0,0,20));
         return dateLabel;
     }
 
     private TaskInstance addToNode()
     {
+        HBox.setHgrow(emptyRegion, Priority.ALWAYS);
+
         setDefaultTaskInstance();
 
         setMargin(removeButton, new Insets(20,0,20,0));
         setMargin(changeDueDateButton, new Insets(20,0,20,10));
         setMargin(finishTaskButton, new Insets(20,20,20,10));
 
+        this.getChildren().add(emptyRegion);
         this.getChildren().add(removeButton);
         this.getChildren().add(changeDueDateButton);
         this.getChildren().add(finishTaskButton);
@@ -128,10 +135,11 @@ public class TaskInstance extends HBox {
 
     private TaskInstance setDoneTask()
     {
+        HBox.setHgrow(emptyRegion, Priority.ALWAYS);
         setDefaultTaskInstance();
         setMargin(removeButton, new Insets(20,40,20,0));
 
-        this.getChildren().add(removeButton);
+        this.getChildren().addAll(emptyRegion,removeButton);
         removeButton.getOnMouseExited().handle(null);
         return this;
     }
@@ -145,6 +153,7 @@ public class TaskInstance extends HBox {
 
         this.getChildren().add(vbox);
         this.getStyleClass().add(TASK_STYLE);
+
     }
 
     private static String getStyle(final Boolean before)
