@@ -31,6 +31,20 @@
     -fx-background-color: #1932af;
     -fx-max-height: 40;
     -fx-max-width: 40;
+    -fx-background-image: url('/images/bell.png');
+    -fx-background-position: center;
+    -fx-background-size: 30px;
+    -fx-background-repeat: no-repeat;
+}
+
+.update-button-no-notification{
+    -fx-background-color: #1932af;
+    -fx-max-height: 40;
+    -fx-max-width: 40;
+    -fx-background-image: url('/images/crossedBell.png');
+    -fx-background-position: center;
+    -fx-background-size: 30px;
+    -fx-background-repeat: no-repeat;
 }
 
 .remove-button{

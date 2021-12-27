@@ -1,27 +1,20 @@
 package com.pap.view.pages;
 
-import com.pap.consts.StageDefault;
 import com.pap.database.user.LastLogin;
 import com.pap.session.UserSession;
 import com.pap.view.alerts.AlertFactory;
-import com.pap.view.stage.StylesheetInitializer;
+import com.pap.view.stage.StageChanger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
@@ -42,10 +35,7 @@ public class LoginPage {
     private Resource createUserResource;
 
     private final UserSession userSession;
-
-    private final ApplicationContext applicationContext;
-    private final StylesheetInitializer stylesheetInitializer;
-    private final StageDefault stageDefault;
+    private final StageChanger stageChanger;
 
     @FXML
     public BorderPane root;
@@ -68,7 +58,7 @@ public class LoginPage {
         if(checkIfUserIsValid(usernameField.getText(),passwordField.getText()))
         {
             createUserSession();
-            generateNewScene(mainStageResource,event);
+            stageChanger.generateNewScene(mainStageResource,event);
         }
         else
         {
@@ -79,29 +69,14 @@ public class LoginPage {
 
     public void createUser(final ActionEvent event) throws IOException
     {
-        generateNewScene(createUserResource,event);
+        stageChanger.generateNewScene(createUserResource, event);
     }
 
-    private void generateNewScene(final Resource resource, final ActionEvent event) throws IOException
-    {
-        final var parent = getParentFromFXML(resource);
-        final var newScene = new Scene(parent, stageDefault.getWidth(), stageDefault.getHeight());
-        var stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stylesheetInitializer.addFilesToScene(newScene);
-        stage.setScene(newScene);
-        stage.show();
-    }
     private boolean checkIfUserIsValid(String username, String password)
     {
         return userSession.getUserRepository().existsUserByUsernameAndPassword(username,password);
     }
 
-    private Parent getParentFromFXML(final Resource resource) throws IOException
-    {
-        final var fxmlLoader = new FXMLLoader(resource.getURL());
-        fxmlLoader.setControllerFactory(applicationContext::getBean);
-        return fxmlLoader.load();
-    }
 
     private void createUserSession()
     {

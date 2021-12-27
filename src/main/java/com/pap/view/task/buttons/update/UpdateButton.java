@@ -6,7 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class UpdateButton extends DisabledButton implements EventHandler<ActionEvent> {
-    private static final String UPDATE_STYLE = "update-button";
+    private static final String UPDATE_NOTIFIED_STYLE = "update-button";
+    private static final String UPDATE_NO_NOTIFICATION_STYLE = "update-button-no-notification";
     private final Task task;
     private final Update update;
 
@@ -16,12 +17,27 @@ public class UpdateButton extends DisabledButton implements EventHandler<ActionE
         this.task = task;
         this.update = update;
         this.setOnAction(this);
-        this.getStyleClass().add(UPDATE_STYLE);
+        setStyle();
     }
 
     @Override
     public void handle(final ActionEvent event)
     {
         update.updateTask(task);
+        setStyle();
+    }
+
+    private void setStyle()
+    {
+        if(task.reminded())
+        {
+            this.getStyleClass().remove(UPDATE_NOTIFIED_STYLE);
+            this.getStyleClass().add(UPDATE_NO_NOTIFICATION_STYLE);
+        }
+        else
+        {
+            this.getStyleClass().remove(UPDATE_NO_NOTIFICATION_STYLE);
+            this.getStyleClass().add(UPDATE_NOTIFIED_STYLE);
+        }
     }
 }

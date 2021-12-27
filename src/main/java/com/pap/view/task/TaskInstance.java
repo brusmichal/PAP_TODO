@@ -31,7 +31,7 @@ public class TaskInstance extends HBox {
     private final Label title;
     private final Label date;
     private final Button removeButton;
-    private final Button changeDueDateButton;
+    private final Button reminderButton;
     private final Button finishTaskButton;
     private final Region emptyRegion = new Region();
 
@@ -47,7 +47,7 @@ public class TaskInstance extends HBox {
         final var title = generateTitle(task);
         final var date = generateDate(task, beforeDueDate);
         final var removeButton = new RemoveButton(task, handler);
-        final var changeDueDateButton =  new UpdateButton(task, handler);
+        final var reminderButton =  new UpdateButton(task, handler);
         final var finishTaskButton = new FinishButton(task, handler);
 
         return TaskInstance.builder()
@@ -55,7 +55,7 @@ public class TaskInstance extends HBox {
                 .withTitle(title)
                 .withDate(date)
                 .withRemoveButton(removeButton)
-                .withChangeDueDateButton(changeDueDateButton)
+                .withReminderButton(reminderButton)
                 .withFinishTaskButton(finishTaskButton)
                 .build()
                 .addToNode();
@@ -119,16 +119,16 @@ public class TaskInstance extends HBox {
         setDefaultTaskInstance();
 
         setMargin(removeButton, new Insets(20,0,20,0));
-        setMargin(changeDueDateButton, new Insets(20,0,20,10));
+        setMargin(reminderButton, new Insets(20,0,20,10));
         setMargin(finishTaskButton, new Insets(20,20,20,10));
 
         this.getChildren().add(emptyRegion);
         this.getChildren().add(removeButton);
-        this.getChildren().add(changeDueDateButton);
+        this.getChildren().add(reminderButton);
         this.getChildren().add(finishTaskButton);
 
         removeButton.getOnMouseExited().handle(null);
-        changeDueDateButton.getOnMouseExited().handle(null);
+        reminderButton.getOnMouseExited().handle(null);
         finishTaskButton.getOnMouseExited().handle(null);
         return this;
     }

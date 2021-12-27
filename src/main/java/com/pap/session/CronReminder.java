@@ -21,22 +21,18 @@ public class CronReminder {
     private final UserSession userSession;
     private final TaskRepository taskRepository;
 
-    @Scheduled(cron="*/60 * * * * *")
+    @Scheduled(cron="*/600 * * * * *")
     public void remindTasksToUser()
     {
         if(userSession.getUsername() != null)
         {
-            final var tasks = taskRepository.getTasksByUserAndStatus(userSession.getUsername(), Status.TO_DO);
+            final var tasks = taskRepository.getTasksByUserAndStatusAndReminded(userSession.getUsername(), Status.TO_DO,false);
             final var reminderTasks = tasks.stream().filter(task -> task.getDueDate().isBefore(LocalDateTime.now())).collect(Collectors.toList()); // getReminder
             if(!reminderTasks.isEmpty())
             {
                 final var taskNames = reminderTasks.stream().map(task -> "- " +task.getTitle()).collect(Collectors.joining("\n"));
                 Platform.runLater(() -> AlertFactory.createErrorDialog("TASKS NEAR DUE DATE !!!", taskNames).show());
-                reminderTasks.forEach(task -> {
-                    task.setReminder(LocalDateTime.MAX);
-                    taskRepository.save(task);
-                });
-                log.info("Tasks were past their remind time, after acknowledgement remind time changed to never");
+                log.info("Tasks were past their due time");
             }
 
         }

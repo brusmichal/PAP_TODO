@@ -83,11 +83,8 @@ public class TaskPage extends DefaultPage<NewTask> implements TaskEvents {
     @Override
     public void updateTask(final Task task)
     {
-        taskRepository.insert(task);
-        getInstanceFromChildren(task).ifPresent(instance -> {
-            vBox.getChildren().remove(instance);
-            addTasksToGridPane();
-        });
+        task.reminded(!task.reminded());
+        taskRepository.save(task);
     }
 
 }

@@ -43,7 +43,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
             final Parent parent = getParentFromFXML();
             final var scene = new Scene(parent, stageDefault.getWidth(), stageDefault.getHeight());
             stylesheetInitializer.addFilesToScene(scene);
-
+            stage.setResizable(false);
             setUpStage(stage, scene);
         }
         catch (final IOException e)
