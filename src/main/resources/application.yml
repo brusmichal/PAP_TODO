@@ -1,4 +1,7 @@
 spring:
+  config:
+    activate:
+      on-profile: default
   data:
     mongodb:
       authentication-database: admin
@@ -25,3 +28,21 @@ sorting:
     com.pap.sort.AlphabeticalSort: Alphabetically
     com.pap.sort.DueDateSort: Due date
     com.pap.sort.DateCreatedSort: Date created
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker-test
+  main:
+    web-application-type: none
+  application:
+    name: pap21zZ25
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG

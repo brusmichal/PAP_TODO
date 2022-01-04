@@ -39,6 +39,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     // Tests
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.6'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.0'
     // Test containers
     testImplementation "org.testcontainers:testcontainers:1.16.2"
     testImplementation "org.testcontainers:mongodb:1.16.2"
@@ -48,5 +49,27 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform()
+    options {
+        systemProperty('spring.profiles.active', 'default')
+    }
+    useJUnitPlatform{
+        excludeTags("mongo-test")
+    }
 }
+
+
+tasks.bootRun {
+    systemProperty('spring.profiles.active', 'default')
+}
+
+tasks.register("databaseTest",Test)
+        {
+            group 'verification'
+            description "Run all database related tests"
+
+            systemProperty('spring.profiles.active', 'docker-test')
+            useJUnitPlatform{
+                includeTags "mongo-test"
+            }
+        }
+
