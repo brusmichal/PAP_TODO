@@ -24,3 +24,8 @@ Testy aplikacji wykonywane są po wykonaniu polecenia:
 [WINDOWS] ./gradlew test
 [UNIX] gradlew test 
 ```
+W celu wykonania testów integracyjnych dla bazy danych no SQL należy uruchomić polecenie:
+```bash
+[WINDOWS] ./gradlew databaseTest
+[UNIX] gradlew databaseTest 
+```

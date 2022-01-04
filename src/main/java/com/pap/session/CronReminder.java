@@ -21,7 +21,7 @@ public class CronReminder {
     private final UserSession userSession;
     private final TaskRepository taskRepository;
 
-    @Scheduled(cron="*/600 * * * * *")
+    @Scheduled(cron="*/60 * * * * *")
     public void remindTasksToUser()
     {
         if(userSession.getUsername() != null)

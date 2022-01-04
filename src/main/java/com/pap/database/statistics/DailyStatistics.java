@@ -1,7 +1,6 @@
 package com.pap.database.statistics;
 
 import com.pap.database.Status;
-import com.pap.database.user.User;
 import lombok.Builder;
 import lombok.NonNull;
 import org.springframework.data.annotation.Id;
@@ -22,11 +21,9 @@ public class DailyStatistics {
     private String user;
 
     // Year of the statistic
-    @NonNull
     private int year;
 
     // Day of the year of the statistic
-    @NonNull
     private int dayOfYear;
 
     // Status of group of tasks
