@@ -5,6 +5,7 @@ plugins {
     id 'java'
     id 'idea'
     id "name.remal.sonarlint" version "1.4.1"
+    id 'com.avast.gradle.docker-compose' version '0.14.13'
 }
 
 group = 'com.pap'
@@ -14,6 +15,18 @@ sourceCompatibility = '17'
 javafx {
     version = "17"
     modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+dockerCompose {
+
+    buildBeforeUp = false
+    removeContainers = false
+    projectName = null
+    useComposeFiles = ['src/main/resources/docker-compose.yaml']
+    startedServices = ['mongodb']
+    stopContainers = false
+    isRequiredBy(project.tasks.bootRun)
+
 }
 
 configurations {
