@@ -10,7 +10,8 @@ public enum ButtonTypes{
     DONE("DONE","highlight-page-button","switch-button-off"),
     REPORTS("REPORTS","highlight-page-button","switch-button-off"),
     LOGOUT("LOGOUT", "log-out-button", "highlight-log-out-button"),
-    SORT("SORTING", "sort-button-highlighted", "sort-button");
+    SORT("SORTING", "sort-button-highlighted", "sort-button"),
+    PERIOD ("PERIOD", "period-button-highlighted", "period-button");
 
     public static final String ACTIVE_STYLE = "switch-button-on";
     private final String text;
