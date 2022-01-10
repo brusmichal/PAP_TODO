@@ -33,6 +33,7 @@ public class PeriodPanel extends VBox {
         reportBy = new Label("Choose report range:");
         reportBy.getStyleClass().add("sort-by");
         this.getChildren().add(reportBy);
+        this.getChildren().addAll(periodButtons);
 
 
 
