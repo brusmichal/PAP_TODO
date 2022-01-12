@@ -28,7 +28,9 @@
     -fx-pref-height: 700;
     -fx-pref-width: 824;
     -fx-background-color: #F3F3F3;
+    -fx-alignment: center;
 }
 .chart{
     -fx-padding: 30;
+    -fx-bar-gap: 30;
 }

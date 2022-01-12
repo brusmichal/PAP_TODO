@@ -10,12 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Component
 
 public class ReportsPage extends VBox {
     protected final UserSession userSession;
@@ -27,8 +27,6 @@ public class ReportsPage extends VBox {
     protected final TimePeriodPanel lowerPanel;
     protected final LocalDateTime dateSince;
     private final ReportDataProvider data;
-
-    @Autowired
     public ReportsPage(final TaskRepository taskRepository, final UserSession userSession)
     {
         this.userSession = userSession;

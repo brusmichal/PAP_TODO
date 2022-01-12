@@ -1,15 +1,11 @@
 package com.pap.view.reports;
 
 import com.pap.database.Status;
-import com.pap.database.task.repository.TaskRepository;
-import com.pap.session.UserSession;
 import com.pap.view.pages.ReportDataProvider;
-import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import lombok.NonNull;
 
 import java.time.LocalDateTime;
 
@@ -46,16 +42,24 @@ public class Chart {
         long unfinishedTasksNumber = data.getGroupedTasksAfterCreationDate(dateSince).getOrDefault(Status.TO_DO, 0L);
         long allTasksNumber = doneTasksNumber + unfinishedTasksNumber;
 
-        dataDoneTasks.getData().add(new XYChart.Data<>("All", doneTasksNumber));
-        dataUnfinishedTasks.getData().add(new XYChart.Data<>("All", unfinishedTasksNumber));
-        dataAllTasks.getData().add(new XYChart.Data<>("All", allTasksNumber));
+        dataDoneTasks.getData().add(new XYChart.Data<>("", doneTasksNumber));
+        dataUnfinishedTasks.getData().add(new XYChart.Data<>("", unfinishedTasksNumber));
+        dataAllTasks.getData().add(new XYChart.Data<>("", allTasksNumber));
+
+        dataDoneTasks.setName("Done");
+        dataUnfinishedTasks.setName("Unfinished");
+        dataAllTasks.setName("All");
+
+        barChart.getData().add(dataAllTasks);
+        barChart.getData().add(dataDoneTasks);
+        barChart.getData().add(dataUnfinishedTasks);
 
     }
 
     private void setUpAxes() {
         xAxis.setLabel("Status");
         yAxis.setLabel("Number");
-        xAxis.getCategories().addAll("All", "Done", "Unfinished");
+        xAxis.getCategories().addAll("Task status");
 
     }
 }
