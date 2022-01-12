@@ -1,4 +1,4 @@
-package com.pap.view.period;
+package com.pap.view.reports;
 
 import com.pap.view.task.buttons.custom.HighlightableButton;
 import com.pap.view.task.buttons.factory.ButtonFactory;
