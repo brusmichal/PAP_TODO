@@ -21,14 +21,15 @@ public class TimePeriodPanel extends VBox {
     private LocalDateTime customDT;
 
 
-    public TimePeriodPanel() {
+
+    public TimePeriodPanel(final UpdateChart updateChart) {
         timePeriodButtons = new ArrayList<>();
-        timePeriodOptions = Map.of("Week", LocalDateTime.now().minusWeeks(1), "Month", LocalDateTime.now().minusMonths(1),
-                "Year", LocalDateTime.now().minusYears(1), "Custom...", customDT = LocalDateTime.now());
+        timePeriodOptions = Map.of("Day", LocalDateTime.now().minusDays(1), "Week", LocalDateTime.now().minusWeeks(1),
+                "Month", LocalDateTime.now().minusMonths(1), "Custom...", customDT = LocalDateTime.now());
         timePeriodOptions.forEach((key, value) -> {
             final var button = ButtonFactory.createButtonWithStyle(ButtonTypes.PERIOD);
             button.setText(key);
-            button.setOnAction((event) -> this.dateSince = value );
+            button.setOnAction((event) -> updateChart.updateChartArea(value));
             button.getStyleClass().add("time-period-button");
             timePeriodButtons.add(button);
                 }

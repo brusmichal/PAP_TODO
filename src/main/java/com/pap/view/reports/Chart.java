@@ -14,6 +14,11 @@ public class Chart {
     private final NumberAxis yAxis;
     private final BarChart<String, Number> barChart;
     private final ReportDataProvider data;
+
+    public LocalDateTime getDateSince() {
+        return dateSince;
+    }
+
     private final LocalDateTime dateSince;
 
 
@@ -28,7 +33,7 @@ public class Chart {
         barChart.getStyleClass().add("chart");
     }
 
-    public BarChart<String, Number> getChart() {
+    public BarChart<String, Number> getBarChart() {
         return barChart;
     }
 
