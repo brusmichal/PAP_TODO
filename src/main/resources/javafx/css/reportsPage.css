@@ -1,0 +1,36 @@
+.report-by{
+    -fx-background-color: #79c99e;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Bell MT Bold";
+    -fx-font-size: 16px;
+    -fx-min-width: 824;
+    -fx-min-height: 40;
+}
+.time-period-button{
+    -fx-background-color: #79c99e;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Bell MT Bold";
+    -fx-font-size: 16px;
+    -fx-min-width: 824;
+    -fx-min-height: 40;
+    -fx-border-color: #000000;
+}
+.time-period-button-highlighted{
+    -fx-background-color: #508484;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Bell MT Bold";
+    -fx-font-size: 16px;
+    -fx-min-width: 824;
+    -fx-min-height: 40;
+    -fx-border-color: #000000;
+}
+.chart-area{
+    -fx-pref-height: 700;
+    -fx-pref-width: 824;
+    -fx-background-color: #F3F3F3;
+    -fx-alignment: center;
+}
+.chart{
+    -fx-padding: 30;
+    -fx-bar-gap: 30;
+}

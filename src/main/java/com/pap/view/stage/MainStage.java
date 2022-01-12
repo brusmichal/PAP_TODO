@@ -4,6 +4,7 @@ import com.pap.database.task.repository.TaskRepository;
 import com.pap.session.UserSession;
 import com.pap.sort.SortingProperties;
 import com.pap.view.pages.DonePage;
+import com.pap.view.pages.ReportsPage;
 import com.pap.view.pages.TaskPage;
 import com.pap.view.task.buttons.custom.ActiveButton;
 import com.pap.view.task.buttons.custom.HighlightableButton;
@@ -125,7 +126,7 @@ public class MainStage {
     private void setReportPage()
     {
         root.getChildren().remove(currentPage);
-        currentPage = new DonePage(taskRepository,sortingProperties, userSession);
+        currentPage = new ReportsPage(taskRepository, userSession);
         root.getChildren().add(currentPage);
     }
 
