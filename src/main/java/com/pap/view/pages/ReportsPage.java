@@ -11,8 +11,6 @@ import javafx.scene.layout.VBox;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 
@@ -21,7 +19,6 @@ public class ReportsPage extends VBox implements UpdateChart {
     protected final TaskRepository taskRepository;
     protected final VBox chartArea;
     protected final BorderPane borderPane;
-    //protected final List<Task> history;
     protected  BarChart<String, Number> chart;
     protected final TimePeriodPanel lowerPanel;
     protected final LocalDateTime dateSince;
