@@ -1,16 +1,13 @@
 package com.pap.view.pages;
 
-import com.pap.database.Status;
-import com.pap.database.task.Task;
 import com.pap.database.task.repository.TaskRepository;
 import com.pap.session.UserSession;
 import com.pap.view.reports.Chart;
-import com.pap.view.reports.PeriodPanel;
-import javafx.scene.Node;
+import com.pap.view.reports.TimePeriodPanel;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -22,11 +19,12 @@ import java.util.List;
 
 public class ReportsPage extends VBox {
     protected final UserSession userSession;
-    private final TaskRepository taskRepository;
-    protected final VBox vBox;
+    protected final TaskRepository taskRepository;
+    protected final VBox chartArea;
+    protected final BorderPane borderPane;
     //protected final List<Task> history;
     protected final List<Chart> charts;
-    protected final PeriodPanel lowerPanel;
+    protected final TimePeriodPanel lowerPanel;
     protected final LocalDateTime dateSince;
     private final ReportDataProvider data;
 
@@ -35,25 +33,27 @@ public class ReportsPage extends VBox {
     {
         this.userSession = userSession;
         this.taskRepository = taskRepository;
-        this.vBox= new VBox();
+        this.chartArea= new VBox();
+        this.borderPane = new BorderPane();
         this.charts = new ArrayList<>();
-        this.lowerPanel = new PeriodPanel();
         this.dateSince = LocalDateTime.now().minusMonths(1);
+        this.lowerPanel = new TimePeriodPanel();
         this.data = new ReportDataProvider(taskRepository, userSession);
         charts.add(new Chart(data, dateSince));
-        vBox.getStyleClass().add("default-grid-pane");
+        setUpChartArea();
         setUpVBox();
-
-//        this.history = taskRepository.getTasksByUserAndStatus(userSession.getUsername(), Status.DONE);
-//        log.info("History for ReportsPage consist of {} done tasks.", history.size());
+    }
 
 
+    private void setUpChartArea() {
+        chartArea.getStyleClass().add("chart-area");
+        chartArea.getChildren().add(charts.get(0).getChart());
 
     }
 
     protected void setUpVBox()
     {
-        getChildren().addAll(charts);
+        getChildren().add(chartArea);
         getChildren().add(lowerPanel);
     }
 
