@@ -8,6 +8,28 @@
         -fx-alignment: center;
 }
 
+.slider-label{
+        -fx-background-color: #a44444;
+        -fx-font-family: "Bell MT";
+        -fx-text-fill: #ffffff;
+        -fx-font-size: 20;
+        -fx-pref-width: 200;
+        -fx-pref-height: 40;
+        -fx-alignment: center;
+}
+
+.slider{
+        -fx-background-color: #a44444;
+        -fx-font-family: "Bell MT";
+        -fx-text-fill: #ffffff;
+}
+.slider .thumb {
+        -fx-background-color: #ff0000;
+}
+.slider .axis {
+        -fx-tick-label-fill: #ffffff;
+}
+
 .switch-button-on{
         -fx-background-color: #882525;
         -fx-font-family: "Bell MT";

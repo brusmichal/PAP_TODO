@@ -13,6 +13,8 @@ import com.pap.view.task.buttons.factory.ButtonTypes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -53,8 +55,10 @@ public class MainStage {
 
     private final Region emptyRegion;
 
+    private final Slider timeSlider;
+
     @Autowired
-    public MainStage(final TaskRepository taskRepository, final UserSession userSession, final SortingProperties sortingProperties)
+    public MainStage(final TaskRepository taskRepository, final UserSession userSession, final SortingProperties sortingProperties, final Slider timeSlider)
     {
         this.taskRepository = taskRepository;
         this.userSession = userSession;
@@ -65,6 +69,7 @@ public class MainStage {
         doneButton = ButtonFactory.createActiveButton(ButtonTypes.DONE,ButtonTypes.ACTIVE_STYLE);
         reportsButton = ButtonFactory.createActiveButton(ButtonTypes.REPORTS,ButtonTypes.ACTIVE_STYLE);
         logout = ButtonFactory.createButtonWithStyle(ButtonTypes.LOGOUT);
+        this.timeSlider = timeSlider;
 
         taskButton.setActive(true);
         taskButton.setOnAction(this::goToTaskPage);
@@ -80,11 +85,16 @@ public class MainStage {
     @FXML
     public void initialize()
     {
+        final var label = new Label("Set reminder time");
+        label.getStyleClass().add("slider-label");
+
         root.getChildren().add(currentPage);
         setTasksPage();
         buttons = List.of(taskButton,doneButton,reportsButton);
         vBox.getChildren().addAll(buttons);
         vBox.getChildren().add(emptyRegion);
+        vBox.getChildren().add(label);
+        vBox.getChildren().add(timeSlider);
         vBox.getChildren().add(logout);
     }
 
