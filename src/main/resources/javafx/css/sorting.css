@@ -1,5 +1,5 @@
 .sort-by{
-    -fx-background-color: #414141;
+    -fx-background-color: #475B63;
     -fx-text-fill: #ffffff;
     -fx-font-family: "Bell MT Bold";
     -fx-font-size: 16px;
@@ -8,8 +8,8 @@
 }
 
 .sort-button{
-    -fx-background-color: #25aab7;
-    -fx-text-fill: #000000;
+    -fx-background-color: #729B79;
+    -fx-text-fill: #ffffff;
     -fx-font-family: "Bell MT Bold";
     -fx-font-size: 16px;
     -fx-min-width: 824;
@@ -18,8 +18,8 @@
 }
 
 .sort-button-highlighted{
-    -fx-background-color: #12777e;
-    -fx-text-fill: #000000;
+    -fx-background-color: #BACDB0;
+    -fx-text-fill: #ffffff;
     -fx-font-family: "Bell MT Bold";
     -fx-font-size: 16px;
     -fx-min-width: 824;

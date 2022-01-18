@@ -5,7 +5,7 @@
 }
 
 .before-date{
-    -fx-text-fill: #11ce13;
+    -fx-text-fill: #20834D;
     -fx-font-size: 20px;
     -fx-font-family: "Bell MT Bold";
 }
@@ -34,9 +34,9 @@
 }
 
 .equal-instance{
-    -fx-background-color: #de7b40;
+    -fx-background-color: #EEF0F2;
 }
 
 .odd-instance{
-    -fx-background-color: #f89b62;
+    -fx-background-color: #DADDD8;
 }

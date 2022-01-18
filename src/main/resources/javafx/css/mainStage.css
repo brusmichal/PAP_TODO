@@ -1,5 +1,5 @@
 .switch-button-off{
-        -fx-background-color: #c24545;
+        -fx-background-color: #2A272A;
         -fx-font-family: "Bell MT";
         -fx-text-fill: #ffffff;
         -fx-font-size: 20;
@@ -9,7 +9,7 @@
 }
 
 .slider-label{
-        -fx-background-color: #a44444;
+        -fx-background-color: #2A272A;
         -fx-font-family: "Bell MT";
         -fx-text-fill: #ffffff;
         -fx-font-size: 20;
@@ -19,19 +19,19 @@
 }
 
 .slider{
-        -fx-background-color: #a44444;
+        -fx-background-color: #2A272A;
         -fx-font-family: "Bell MT";
         -fx-text-fill: #ffffff;
 }
 .slider .thumb {
-        -fx-background-color: #ff0000;
+        -fx-background-color: #EF2D56;
 }
 .slider .axis {
         -fx-tick-label-fill: #ffffff;
 }
 
 .switch-button-on{
-        -fx-background-color: #882525;
+        -fx-background-color: #729B79;
         -fx-font-family: "Bell MT";
         -fx-text-fill: #ffffff;
         -fx-font-size: 20;
@@ -41,7 +41,7 @@
 }
 
 .highlight-page-button{
-        -fx-background-color: #ce2b2b;
+        -fx-background-color: #BACDB0;
         -fx-font-family: "Bell MT";
         -fx-text-fill: #ffffff;
         -fx-font-size: 20;
@@ -51,7 +51,7 @@
 }
 
 .log-out-button{
-        -fx-background-color: #b22a15;
+        -fx-background-color: #EF2D56;
         -fx-font-family: "Bell MT";
         -fx-text-fill: #ffffff;
         -fx-font-size: 20;
@@ -61,7 +61,7 @@
 }
 
 .highlight-log-out-button{
-        -fx-background-color: #b24937;
+        -fx-background-color: #2A272A;
         -fx-font-family: "Bell MT";
         -fx-text-fill: #ffffff;
         -fx-font-size: 20;

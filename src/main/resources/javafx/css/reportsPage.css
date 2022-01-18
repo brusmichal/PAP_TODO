@@ -1,5 +1,5 @@
 .report-by{
-    -fx-background-color: #79c99e;
+    -fx-background-color: #475B63;
     -fx-text-fill: #ffffff;
     -fx-font-family: "Bell MT Bold";
     -fx-font-size: 16px;
@@ -7,7 +7,7 @@
     -fx-min-height: 40;
 }
 .time-period-button{
-    -fx-background-color: #79c99e;
+    -fx-background-color: #729B79;
     -fx-text-fill: #ffffff;
     -fx-font-family: "Bell MT Bold";
     -fx-font-size: 16px;
@@ -16,7 +16,7 @@
     -fx-border-color: #000000;
 }
 .time-period-button-highlighted{
-    -fx-background-color: #508484;
+    -fx-background-color: #BACDB0;
     -fx-text-fill: #ffffff;
     -fx-font-family: "Bell MT Bold";
     -fx-font-size: 16px;
@@ -35,6 +35,6 @@
     -fx-bar-gap: 30;
 }
 .default-color0.chart-bar { -fx-bar-fill: #788585; }
-.default-color1.chart-bar { -fx-bar-fill: #7A9B76; }
-.default-color2.chart-bar { -fx-bar-fill: #815355; }
-.default-color3.chart-bar { -fx-bar-fill: #5A2328; }
+.default-color1.chart-bar { -fx-bar-fill: #2FBF71; }
+.default-color2.chart-bar { -fx-bar-fill: #ED7D3A; }
+.default-color3.chart-bar { -fx-bar-fill: #EF2D56; }
