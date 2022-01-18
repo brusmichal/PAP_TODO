@@ -10,7 +10,7 @@
       <HBox fx:id="root" />
    </center>
    <left>
-          <VBox fx:id="vBox" style="-fx-background-color: #c24545;" BorderPane.alignment="CENTER">
+          <VBox fx:id="vBox" style="-fx-background-color: #2A272A;" BorderPane.alignment="CENTER">
        </VBox>
    </left>
    <bottom>

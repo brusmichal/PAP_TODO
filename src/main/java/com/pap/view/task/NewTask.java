@@ -43,6 +43,7 @@ public class NewTask extends HBox implements Remove, Add {
         HBox.setHgrow(textField, Priority.ALWAYS);
         this.getChildren().addAll(textField,hourPicker,datePicker,clearButton, addButton);
         datePicker.setValue(LocalDate.now());
+        clearButton.getStyleClass().clear();
         clearButton.getStyleClass().add(CLEAR_STYLE);
         clearButton.setOnMouseExited((event->{}));
 

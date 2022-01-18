@@ -40,24 +40,30 @@ public class Chart {
     private void loadChartData() {
         XYChart.Series <String, Number> dataAllTasks = new XYChart.Series<>();
         XYChart.Series <String, Number> dataDoneTasks = new XYChart.Series<>();
-        XYChart.Series <String, Number> dataUnfinishedTasks = new XYChart.Series<>();
+        XYChart.Series <String, Number> dataonTimeTasks = new XYChart.Series<>();
+        XYChart.Series <String, Number> dataLateTasks = new XYChart.Series<>();
 
         data.getGroupedTasksAfterCreationDate(dateSince).forEach((key, value) -> System.out.println("Key: " + key + ", " + "value: " + value ));
         long doneTasksNumber = data.getGroupedTasksAfterCreationDate(dateSince).getOrDefault(Status.DONE, 0L);
         long unfinishedTasksNumber = data.getGroupedTasksAfterCreationDate(dateSince).getOrDefault(Status.TO_DO, 0L);
+        long lateTasksNumber = data.getLateGroupedTasksAfterCreationDate(dateSince).getOrDefault(Status.TO_DO, 0L);
+        long onTimeTaskNumber = unfinishedTasksNumber - lateTasksNumber;
         long allTasksNumber = doneTasksNumber + unfinishedTasksNumber;
 
         dataDoneTasks.getData().add(new XYChart.Data<>("", doneTasksNumber));
-        dataUnfinishedTasks.getData().add(new XYChart.Data<>("", unfinishedTasksNumber));
+        dataonTimeTasks.getData().add(new XYChart.Data<>("", onTimeTaskNumber));
+        dataLateTasks.getData().add(new XYChart.Data<>("", lateTasksNumber));
         dataAllTasks.getData().add(new XYChart.Data<>("", allTasksNumber));
 
         dataDoneTasks.setName("Done");
-        dataUnfinishedTasks.setName("Unfinished");
+        dataonTimeTasks.setName("Unfinished");
+        dataLateTasks.setName("Late");
         dataAllTasks.setName("All");
 
         barChart.getData().add(dataAllTasks);
         barChart.getData().add(dataDoneTasks);
-        barChart.getData().add(dataUnfinishedTasks);
+        barChart.getData().add(dataonTimeTasks);
+        barChart.getData().add(dataLateTasks);
 
     }
 

@@ -5,14 +5,12 @@ import com.pap.database.task.Task;
 import com.pap.database.task.repository.TaskRepository;
 import com.pap.session.UserSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.schema.JsonSchemaObject;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -41,6 +39,20 @@ public class ReportDataProvider {
         final var tasks = taskRepository.getTasksByUserAndCreationTimeAfter(userSession.getUsername(),creationDate);
         return groupTasks(tasks);
     }
+
+    public Map<Status, Long> getLateGroupedTasksAfterCreationDate(final LocalDateTime creationDate)
+    {
+        final var tasks = taskRepository.getTasksByUserAndCreationTimeAfter(userSession.getUsername(),creationDate);
+        final List<Task> late_tasks = new ArrayList<>();
+        tasks.forEach((task -> {
+            final var isLate= task.getDueDate().isAfter(LocalDateTime.now());
+            if(isLate){
+                late_tasks.add(task);
+            }
+        }));
+        return groupTasks(late_tasks);
+    }
+
 
     public Map<Status,Task> getFastestDoneAfterCreationDate(final LocalDateTime creationDate)
     {

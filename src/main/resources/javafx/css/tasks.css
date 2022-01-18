@@ -1,7 +1,7 @@
 .default-grid-pane{
     -fx-pref-height: 700;
     -fx-pref-width: 824;
-    -fx-background-color: #d3a389;
+    -fx-background-color: #FAFAFF;
 }
 
 .task-text-field{
@@ -28,4 +28,10 @@
     -fx-pref-width: 200;
 }
 
+
+.date-selector{
+    -fx-alignment: center;
+    -fx-font-size: 25px;
+    -fx-pref-width: 200;
+}
 
