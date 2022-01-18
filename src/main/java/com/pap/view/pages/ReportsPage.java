@@ -19,15 +19,15 @@ public class ReportsPage extends VBox implements UpdateChart {
     protected final TaskRepository taskRepository;
     protected final VBox chartArea;
     protected final BorderPane borderPane;
-    protected  BarChart<String, Number> chart;
+    protected BarChart<String, Number> chart;
     protected final TimePeriodPanel lowerPanel;
     protected final LocalDateTime dateSince;
     private final ReportDataProvider data;
-    public ReportsPage(final TaskRepository taskRepository, final UserSession userSession)
-    {
+
+    public ReportsPage(final TaskRepository taskRepository, final UserSession userSession) {
         this.userSession = userSession;
         this.taskRepository = taskRepository;
-        this.chartArea= new VBox();
+        this.chartArea = new VBox();
         this.borderPane = new BorderPane();
 
         this.dateSince = LocalDateTime.now().minusDays(1);
@@ -52,10 +52,10 @@ public class ReportsPage extends VBox implements UpdateChart {
         chartArea.getChildren().add(chart);
     }
 
-    protected void setUpVBox()
-    {
+    protected void setUpVBox() {
         getChildren().add(chartArea);
         getChildren().add(lowerPanel);
     }
-
 }
+
+

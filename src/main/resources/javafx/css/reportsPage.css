@@ -34,3 +34,7 @@
     -fx-padding: 30;
     -fx-bar-gap: 30;
 }
+.default-color0.chart-bar { -fx-bar-fill: #788585; }
+.default-color1.chart-bar { -fx-bar-fill: #7A9B76; }
+.default-color2.chart-bar { -fx-bar-fill: #815355; }
+.default-color3.chart-bar { -fx-bar-fill: #5A2328; }
